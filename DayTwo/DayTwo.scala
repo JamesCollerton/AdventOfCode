@@ -4,19 +4,21 @@ object DayTwo {
 
 	def readIn(): Unit = {
 
-		val bufferedSource;
-
-		try {
-
-			bufferedSource = Source.fromFile("DayTwoInput.txt");
-
-			for (line <- bufferedSource.getLines) {
+		def printTest(resource: Source): Unit = {
+			for (line <- resource.getLines) {
 				println(line)
 			}
-
-		} finally {
-			bufferedSource.close;
 		}
+
+		def using[A <: { def close(): Unit }, B](resource: A)(f: A => B){
+			try {
+				f(resource)
+			} finally {
+				resource.close;
+			}
+		}
+
+		using(Source.fromFile("DayTwoInput.txt"))(printTest);		
 
 	}
 	
