@@ -3,13 +3,13 @@ import scala.collection.mutable.ArrayBuffer
 
 object DayTwo {
 
-	def readIn(): ArrayBuffer[Array[String]] = {
+	def readIn(): ArrayBuffer[Array[Int]] = {
 
-		def readRows(resource: Source): ArrayBuffer[Array[String]] = {
-			val rows = ArrayBuffer[Array[String]]()
+		def readRows(resource: Source): ArrayBuffer[Array[Int]] = {
+			val rows = ArrayBuffer[Array[Int]]()
 
 			for (line <- resource.getLines) {
-				rows += line.split("\t").map(_.trim)
+				rows += line.split("\t").map(_.trim.toInt)
 			}
 
 			//printRows(rows)
@@ -17,7 +17,7 @@ object DayTwo {
 			rows
 		}
 
-		def printRows(rows : ArrayBuffer[Array[String]]): Unit = {
+		def printRows(rows : ArrayBuffer[Array[Int]]): Unit = {
 			for(fieldRow <- rows){
 				println(fieldRow.mkString(" "));
 			}
@@ -35,12 +35,12 @@ object DayTwo {
 
 	}
 	
-	def calculateChecksum(rows: ArrayBuffer[Array[String]]): Int = {
+	def calculateChecksum(rows: ArrayBuffer[Array[Int]]): Int = {
 		if(rows.size == 0) return 0;
-		val diff = rows(0).max.toInt - rows(0).min.toInt 
+		val diff = rows(0).max - rows(0).min 
 		println("Row " + rows(0).mkString(" "))
-		println("Max " + rows(0).max.toInt)
-		println("Min " + rows(0).min.toInt)
+		println("Max " + rows(0).max)
+		println("Min " + rows(0).min)
 		println("Difference found " + diff)
 		println()
 		calculateChecksum(rows.slice(1, rows.length)) + diff
@@ -48,7 +48,7 @@ object DayTwo {
 
 	def main(args: Array[String]): Unit = {
 		val rows = readIn();
-		calculateChecksum(rows);
+		println("Checksum " + calculateChecksum(rows));
 	}	
 
 }
