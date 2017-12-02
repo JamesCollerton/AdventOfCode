@@ -4,9 +4,12 @@ object DayTwo {
 
 	def readIn(): Unit = {
 
-		def printTest(resource: Source): Unit = {
+		val rows = ArrayBuffer[Array[String]]()
+
+		def printTest(resource: Source): ArrayBuffer[Array[String]] = {
 			for (line <- resource.getLines) {
-				println(line)
+				rows += line.split("\t").map(_.trim);
+//				println(line)
 			}
 		}
 
