@@ -36,14 +36,18 @@ object DayTwo {
 	}
 	
 	def calculateChecksum(rows: ArrayBuffer[Array[Int]]): Int = {
-		if(rows.size == 0) return 0;
-		val diff = rows(0).max - rows(0).min 
-		println("Row " + rows(0).mkString(" "))
-		println("Max " + rows(0).max)
-		println("Min " + rows(0).min)
-		println("Difference found " + diff)
+		if(rows.size == 0) return 0
+		val currRow = rows(0)
+		var divided = currRow(0)
+		var divisor = currRow(0)
+		for(field <- currRow){
+			currRow.map(a => a % field == 0);
+		}
+		println("Row " + currRow.mkString(" "))
+		println("Divided " + divided)
+		println("Divisor " + divisor)
 		println()
-		calculateChecksum(rows.slice(1, rows.length)) + diff
+		calculateChecksum(rows.slice(1, rows.length)) + 0
 	}
 
 	def main(args: Array[String]): Unit = {
