@@ -31,7 +31,7 @@ object DayTwo {
 			}
 		}
 
-		using(Source.fromFile("DayTwoInput.txt"))(readRows);		
+		using(Source.fromFile("DayTwoTestInputTwo.txt"))(readRows);		
 
 	}
 	
@@ -40,14 +40,19 @@ object DayTwo {
 		val currRow = rows(0)
 		var divided = currRow(0)
 		var divisor = currRow(0)
-		for(field <- currRow){
-			currRow.map(a => a % field == 0);
+		for(i <- currRow){
+			for(j <- currRow){
+				if(i % j == 0 && i != j){
+					divided = i;
+					divisor = j;	
+				}
+			}
 		}
 		println("Row " + currRow.mkString(" "))
 		println("Divided " + divided)
 		println("Divisor " + divisor)
 		println()
-		calculateChecksum(rows.slice(1, rows.length)) + 0
+		calculateChecksum(rows.slice(1, rows.length)) + divided / divisor
 	}
 
 	def main(args: Array[String]): Unit = {
