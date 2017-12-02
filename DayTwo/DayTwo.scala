@@ -1,39 +1,9 @@
 import scala.io.Source
 import scala.collection.mutable.ArrayBuffer
 
+import Utils._
+
 object DayTwo {
-
-	def readIn(): ArrayBuffer[Array[Int]] = {
-
-		def readRows(resource: Source): ArrayBuffer[Array[Int]] = {
-			val rows = ArrayBuffer[Array[Int]]()
-
-			for (line <- resource.getLines) {
-				rows += line.split("\t").map(_.trim.toInt)
-			}
-
-			//printRows(rows)
-
-			rows
-		}
-
-		def printRows(rows : ArrayBuffer[Array[Int]]): Unit = {
-			for(fieldRow <- rows){
-				println(fieldRow.mkString(" "));
-			}
-		}
-
-		def using[A <: { def close(): Unit }, B](resource: A)(f: A => B): B = {
-			try {
-				f(resource)
-			} finally {
-				resource.close;
-			}
-		}
-
-		using(Source.fromFile("DayTwoTestInputTwo.txt"))(readRows);		
-
-	}
 	
 	def calculateChecksum(rows: ArrayBuffer[Array[Int]]): Int = {
 		if(rows.size == 0) return 0
@@ -56,7 +26,7 @@ object DayTwo {
 	}
 
 	def main(args: Array[String]): Unit = {
-		val rows = readIn();
+		val rows = Utils.readIn("DayTwoInput.txt");
 		println("Checksum " + calculateChecksum(rows));
 	}	
 
