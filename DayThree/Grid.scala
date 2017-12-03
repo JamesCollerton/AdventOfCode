@@ -13,7 +13,7 @@ object Grid {
 	}
 
 	def draw(): Unit = {
-		move(addZeros(addZeros(ArrayBuffer(ArrayBuffer(1)))), (0, 0), 0, 122);
+		move(addZeros(addZeros(ArrayBuffer(ArrayBuffer(1)))), (0, 0), 0, 325489);
 	}
 
 	def addZeros(grid: ArrayBuffer[ArrayBuffer[Int]]): ArrayBuffer[ArrayBuffer[Int]] = {
@@ -24,17 +24,21 @@ object Grid {
 	}
 
 	def sumOutsides(grid: ArrayBuffer[ArrayBuffer[Int]], coord: (Int, Int)): Int = {
-		val outside = for {
-					i <- -1 to 1
-					j <- -1 to 1 if (i != j && i != 0)
-				 } yield {
-					grid(getYCoordAdj(grid, coord._2 + i))(getXCoordAdj(grid, coord._1 + j))
-				 }
-		outside.sum  
+	//	val outside = for {
+	//				i <- -1 to 1
+	//				j <- -1 to 1 if (i != j && i != 0)
+	//			 } yield {
+	//				println(getYCoordAdj(grid, coord._2 + i) + " " + getXCoordAdj(grid, coord._1 + j))
+	//				grid(getYCoordAdj(grid, coord._2 + i))(getXCoordAdj(grid, coord._1 + j))
+	//			 }
+		var total = 0;
+		for(i <- -1 to 1) {
+			for(j <- -1 to 1){
+				total += grid(getYCoordAdj(grid, coord._2 + i))(getXCoordAdj(grid, coord._1 + j))
+			}
+		}
+		total
 	}
-
-	// Note, you can probably simplify this problem by adding a cushioning
-	// layer of zeros on the outside
 
 	def calcNewGrid(grid: ArrayBuffer[ArrayBuffer[Int]], coords: (Int, Int), target: Int): ArrayBuffer[ArrayBuffer[Int]] = {
 
@@ -44,7 +48,7 @@ object Grid {
 			System.exit(0)
 		}
 
-		grid(getYCoordAdj(grid, coords._2))(getXCoordAdj(grid, coords._1)) = outsideSum 
+		grid(getYCoordAdj(grid, coords._2))(getXCoordAdj(grid, coords._1)) = outsideSum
 
 		printGrid(grid)
 		println("" + getYCoordAdj(grid, coords._1) + " " + (getXCoordAdj(grid, coords._2)))
@@ -93,8 +97,18 @@ object Grid {
 		tempCounter += 1
 
 		// Move left counter times
+		for(i <- 1 to tempCounter){
+			tempCoords = (tempCoords._1 - 1, tempCoords._2)
+			tempGrid = calcNewGrid(tempGrid, tempCoords, target)
+		}
 
 		// Move down counter times
+		for(i <- 1 to tempCounter){
+			tempCoords = (tempCoords._1, tempCoords._2 - 1)
+			tempGrid = calcNewGrid(tempGrid, tempCoords, target)
+		}
+
+		move(addZeros(grid), tempCoords, tempCounter, target)
 
 	} 
 
