@@ -61,7 +61,7 @@ object Grid {
 		if(grid.size % 2 == 0){
 			grid.size / 2 + x
 		} else {
-			(grid.size) / 2 + x
+			(grid.size - 1) / 2 + x
 		}
 	}
 
