@@ -12,10 +12,11 @@ object DayThree {
 	// 325489: (16, 0) to (284, 284) on a 571 x 571 grid, answer: 31
 
 	def main(args: Array[String]): Unit = {
-		println("12: " + SolveGrid.calculateDistance((4, 3), (2, 2)))
-		println("23: " + SolveGrid.calculateDistance((2, 0), (2, 2)))
-		println("1024: " + SolveGrid.calculateDistance((1, 32), (16, 16)))
-		println("325489: " + SolveGrid.calculateDistance((16, 0), (284, 284)))
+		//println("12: " + SolveGrid.calculateDistance((4, 3), (2, 2)))
+		//println("23: " + SolveGrid.calculateDistance((2, 0), (2, 2)))
+		//println("1024: " + SolveGrid.calculateDistance((1, 32), (16, 16)))
+		//println("325489: " + SolveGrid.calculateDistance((16, 0), (284, 284)))
+		Grid.draw()
 	}		
 
 }
