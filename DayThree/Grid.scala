@@ -44,7 +44,7 @@ object Grid {
 			System.exit(0)
 		}
 
-		grid(getYCoordAdj(grid, coords._2))(getXCoordAdj(grid, coords._1)) = 8 
+		grid(getYCoordAdj(grid, coords._2))(getXCoordAdj(grid, coords._1)) = outsideSum 
 
 		printGrid(grid)
 		println("" + getYCoordAdj(grid, coords._1) + " " + (getXCoordAdj(grid, coords._2)))
