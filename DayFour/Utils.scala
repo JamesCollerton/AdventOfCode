@@ -18,7 +18,7 @@ object Utils {
 				rows += line.split(" ").map(_.trim)
 			}
 
-			printRows(rows)
+			// printRows(rows)
 
 			rows
 		}
