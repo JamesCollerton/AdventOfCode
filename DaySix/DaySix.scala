@@ -7,8 +7,8 @@ object DaySix {
 
 	def main(args: Array[String]): Unit = {
 		val input = Utils.readIn("DaySixInput.txt")(0)
-		//solveOne(input)
-		solveTwo(input)
+		solveOne(input)
+		//solveTwo(input)
 	}
 
 	def solveOne(arr: Array[Int]): Unit = {
@@ -24,16 +24,7 @@ object DaySix {
 
 		doneArr += arr.clone
 
-		var maxIndex = arr.zipWithIndex.maxBy(_._1)._2
-		var maxAmount = arr(maxIndex)
-		arr(maxIndex) = 0
-
-		while(maxAmount > 0) {
-			maxIndex += 1
-			if (maxIndex >= arr.length) maxIndex = 0
-			arr(maxIndex) += 1
-			maxAmount -= 1	
-		}
+		recalculateArray(arr)
 	
 		if (doneArr.map(finArr => finArr.sameElements(arr)).contains(true)) return counter + 1
 		moveOne(arr, doneArr, counter + 1)
