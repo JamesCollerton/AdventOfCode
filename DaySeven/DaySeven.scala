@@ -38,17 +38,32 @@ object DaySeven {
                     case (k, v) => (k.split(" ")(0), v)
                 }
                 
-                //println("Results for " + programBranches(bottom).map(prog => recurseStep(prog, programWeights, programBranches)).mkString(" "))
-                val bottomBranch = programBranches(bottom).map(prog => (prog, programWeights(prog), recurseStep(prog, programWeights, programBranches)))
-                val majorityValue = bottomBranch.map(x => x._3).groupBy(identity).maxBy(_._2.size)._1
-                val oddBranch = bottomBranch.filter(x => x._3 != majorityValue) //.map(x => x._2 + (majorityValue - x._3))
-                println(oddBranch(0)._1 + " " + oddBranch(0)._2  + " " + oddBranch(0)._3)
-                //println("New value " + oddBranch.mkString(""))
+		recurseStep(bottom, programWeights, programBranches)
 
         }
 
-        def recurseStep(bottom: String, programWeights: HashMap[String, Int], programBranches: HashMap[String, Array[String]]): Int = {
-              programBranches(bottom).map(prog => recurseStep(prog, programWeights, programBranches)).sum + programWeights(bottom)
+        def recurseStep(bottom: String, programWeights: HashMap[String, Int], programBranches: HashMap[String, Array[String]]): (String, Int) = {
+                
+		val branchLeaves = programBranches(bottom).map(prog => recurseStep(prog, programWeights, programBranches))
+
+		if(branchLeaves.length > 0) {
+			val majorityValue = branchLeaves.map(x => x._2).groupBy(identity).maxBy(_._2.size)._1
+			val oddBranch = branchLeaves.filter(x => x._2 != majorityValue)
+	
+			if(oddBranch.size != 0) {
+				println()
+				println("Branch value " + oddBranch(0)._1)
+				println("Branch weight " + programWeights(oddBranch(0)._1))
+				println("Weight we're aiming for " + majorityValue)
+				println("Weight we're at " + oddBranch(0)._2)
+				println("New branch value " + (programWeights(oddBranch(0)._1) + (majorityValue - oddBranch(0)._2)))
+			} 
+
+			(bottom, branchLeaves.map(x => x._2).sum + programWeights(bottom))
+		} else {
+			(bottom, programWeights(bottom))
+		}
+
         }
 
 }
