@@ -29,7 +29,7 @@ object Utils {
 				programMap(programInfo(0)) = supportedPrograms
 			}
 
-			printRows(programMap)
+			// printRows(programMap)
 
 			programMap
 		}
