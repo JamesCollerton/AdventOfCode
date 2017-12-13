@@ -5,23 +5,43 @@ object DayThirteen {
 
 	def main(args: Array[String]): Unit = {
 		val input = Utils.readIn("DayThirteenInput.txt")
-		solveOne(input)
+		solveTwo(input)
 	}
 
-	def solveOne(fireWall: HashMap[Int, (Int, Int, Boolean)]): Unit = {
+	def solveTwo(fireWall: HashMap[Int, (Int, Int, Boolean)]): Unit = {
 		val stopPosition = fireWall.map{ case(k, v) => k }.toArray.max
-		println("Severity " + solveOneStep(0, fireWall, stopPosition))
+		println("Number of seconds delay  " + solveTwoStep(fireWall, stopPosition, 0))
 	}
 
-	def solveOneStep(currPos: Int, fireWall: HashMap[Int, (Int, Int, Boolean)], stopPosition: Int): Int = {
-		if(currPos > stopPosition) return 0
+	@annotation.tailrec
+	def solveTwoStep(fireWall: HashMap[Int, (Int, Int, Boolean)], stopPosition: Int, delay: Int): Int = {
+		val fireWallClone = fireWall.clone
+		val caught = solveOneStep(-delay, fireWall, stopPosition)  
+		if(!caught) return delay;
+		if(delay % 1000 == 0){
+		println()
+		println("CALLING NEXT: " + delay)
+		}
+		solveTwoStep(fireWallClone, stopPosition, delay + 1)
+	}
+
+	@annotation.tailrec
+	def solveOneStep(currPos: Int, fireWall: HashMap[Int, (Int, Int, Boolean)], stopPosition: Int): Boolean = {
+
+		// Reached end
+		if(currPos > stopPosition) return false
+
+		// Got caught
+		if(fireWall.contains(currPos) && fireWall(currPos)._2 == 1) return true
 
 		// Check if we're caught
-		val caughtIncrement = if(fireWall.contains(currPos) && fireWall(currPos)._2 == 1) { 
-			currPos * fireWall(currPos)._1
-		} else {
-			0
-		}
+		//val caughtIncrement = if(fireWall.contains(currPos) && fireWall(currPos)._2 == 1) { 
+		//	println()
+		//	println("Current Position " + currPos)
+		//	true
+		//} else {
+		//	false
+		//}
 
 		val movedFireWall = fireWall
 		fireWall.foreach{case(k, v)  => {
@@ -50,7 +70,7 @@ object DayThirteen {
 		//println()
 		//movedFireWall.foreach{ case(k, v) => println("Key " + k  + " Value " + v._1 + ", " + v._2 + ", " + v._3) }
 			
-		solveOneStep(currPos + 1, movedFireWall, stopPosition) + caughtIncrement
+		solveOneStep(currPos + 1, movedFireWall, stopPosition)
 	}
 
 }
