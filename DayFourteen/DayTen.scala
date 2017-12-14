@@ -2,7 +2,7 @@ package DayTen
 
 object DayTen {
 
-	def solveTwo(lengths: Array[Int], endNum: Int): Unit = {
+	def solveTwo(lengths: Array[Int], endNum: Int): String = {
 
 		// Create array
 		val seq = (0 to endNum).toArray
@@ -17,11 +17,12 @@ object DayTen {
 
 		// Fairly confident here down is correct
 		val denseHash = (0 to 15).map(i => sparseHash.slice(16 * i, 16 * (i + 1)).reduce(_ ^ _))
-		println("Dense Hash " + denseHash.mkString(" "))
 
 		// Convert to hexadecimal
-		println(denseHash.map(_.toHexString.reverse.padTo(2, "0").reverse.mkString("")).mkString(""))
 
+		val knotHash = denseHash.map(_.toHexString.reverse.padTo(2, "0").reverse.mkString("")).mkString("")
+		//println("Knot Hash: " + knotHash)
+		knotHash
 	}
 
 	def solveOneStep(arr: Array[Int], lengths: Array[Int], currPos: Int, skip: Int): Array[Int] = {
