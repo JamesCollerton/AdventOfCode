@@ -8,8 +8,7 @@ object DayTen {
 		val seq = (0 to endNum).toArray
 
 		// Convert lengths into ASCII (think this works)
-		val byteArr = lengths.flatMap(c => c.toString.map(_.toChar.toInt) :+ ','.toInt).dropRight(1) ++ 
-			      List(17, 31, 73, 47, 23)
+		val byteArr = lengths.toList ++ List(17, 31, 73, 47, 23)
 
 		// Run the solution 64 times, I think this is
 		// just the same as keeping running 64 times.
