@@ -6,7 +6,7 @@ import scala.collection.mutable.ArrayBuffer
 object DayFourteen {
 
 	def main(args: Array[String]): Unit = {
-		val input = Utils.readIn("DayFourteenTestInput.txt")(0)
+		val input = Utils.readIn("DayFourteenInput.txt")(0)
 		val hashGrid = convertToArrayGrid(getHashGrid(input))
 		val regionGrid = convertToArrayGrid(getRegionGrid())
 		findRegions(hashGrid, regionGrid)
@@ -23,57 +23,44 @@ object DayFourteen {
 			}
 		}
 	
-		//gridArray.foreach(row => {
-		//	row.foreach(field => print(field.toString))
-		//	println()
-		//})
-	
 		gridArray
 
 	}
 
-	def findRegions(hashGrid: Array[Array[Int]], regionGrid: Array[Array[Int]]): Int = {
-		var regionCounter = 0;		
+	def findRegions(hashGrid: Array[Array[Int]], regionGrid: Array[Array[Int]]): Unit = {
+		var regionCounter = 1;		
 
 		for(i <- 1 to hashGrid.length - 2) {
 			val row = hashGrid(i)
 			for(j <- 1 to row.length - 2) {
-				if(row(j) == 1) {
-					regionCounter = searchRegionGrid(i, j, regionGrid, regionCounter)
-		//			println()
-		//			regionGrid.foreach(row => println(row.mkString(" ")))
-					//println(regionCounter)
-					//println()
+				if(row(j) == 1 && regionGrid(i)(j) == 0) {
+					regionCounter = searchRegionGrid(i, j, regionCounter, hashGrid, regionGrid)
 				} 
-				//println(regionCounter)
 			}
 		}
 		
 		regionGrid.foreach(row => println(row.mkString(" ")))
-
-	//	regionGrid.foreach(row => println(row))
-		println("Region counter " + regionCounter)
-		0
+		println("Region counter " + (regionCounter - 1))
 	}
 
-	def searchRegionGrid(i: Int, j: Int, regionGrid: Array[Array[Int]], regionCounter: Int): Int = {
+	def searchRegionGrid(i: Int, j: Int, regionCounter: Int, hashGrid: Array[Array[Int]], regionGrid: Array[Array[Int]]): Int = {
 
-		val above = regionGrid(i - 1)(j)
-		val left = regionGrid(i)(j - 1)
+		// Change current place on regionGrid
+		if(hashGrid(i)(j) != 0 && regionGrid(i)(j) == 0) regionGrid(i)(j) = regionCounter
 
-		val newValue = if(above != 0) { 
-			println("HEre")
-			regionGrid(i)(j) = above 
-		} else if(left != 0) {
-			println("Here")
-			regionGrid(i)(j) = left 
-		} else { 
-			regionGrid(i)(j) = regionCounter + 1
-			return regionCounter + 1
-		}
+		// Above
+		if(hashGrid(i - 1)(j) != 0 && regionGrid(i - 1)(j) == 0) searchRegionGrid(i - 1, j, regionCounter, hashGrid, regionGrid)
 
-		return regionCounter
-	
+		// Right
+		if(hashGrid(i)(j + 1) != 0 && regionGrid(i)(j + 1) == 0) searchRegionGrid(i, j + 1, regionCounter, hashGrid, regionGrid)
+
+		// Below
+		if(hashGrid(i + 1)(j) != 0 && regionGrid(i + 1)(j) == 0) searchRegionGrid(i + 1, j, regionCounter, hashGrid, regionGrid)
+
+		// Left
+		if(hashGrid(i)(j - 1) != 0 && regionGrid(i)(j - 1) == 0) searchRegionGrid(i, j - 1, regionCounter, hashGrid, regionGrid)
+
+		regionCounter + 1	
 	}
 
 	def getHashGrid(input: String): Array[String] = {
