@@ -24,6 +24,7 @@ object DayFifteen {
 	@annotation.tailrec
 	def generateList(value: Int, remaining: Int, multiplier: Int, factor: Int, array: ArrayBuffer[Int]): ArrayBuffer[Int] = {
 		if(array.length > remaining) return array
+		if(array.length % 1000 == 0) println("" + array.length)
 		val divisor = 2147483647
 		val remainder = ((value.toDouble * multiplier.toDouble) % divisor.toDouble).toInt
 		if (remainder % factor == 0) array += remainder
