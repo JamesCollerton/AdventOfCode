@@ -1,12 +1,33 @@
+import scala.collection.mutable.ArrayBuffer
 
 object DayFifteen {
 
 	def main(args: Array[String]): Unit = {
-		solveOne();
+		solveTwo();
 	}
 
-	def solveOne(): Unit = {
-		println("Number of matches " + solveOneStep(699, 124, 40000000, 0))
+	def solveTwo(): Unit = {
+		val aList = generateList(65,   5000000, 16807, 4, ArrayBuffer())
+		val bList = generateList(8921, 5000000, 48271, 8, ArrayBuffer())
+
+		println("Got lists")
+		println("A " + aList.length + " B " + bList.length)
+
+		val clashingIndexes = for {
+			i <- 0 to Math.min(aList.length, bList.length) - 1
+			if (aList(i).toBinaryString.takeRight(16) == bList(i).toBinaryString.takeRight(16))
+		} yield 1
+
+		println("Sum " + clashingIndexes.sum)
+	}
+
+	@annotation.tailrec
+	def generateList(value: Int, remaining: Int, multiplier: Int, factor: Int, array: ArrayBuffer[Int]): ArrayBuffer[Int] = {
+		if(array.length > remaining) return array
+		val divisor = 2147483647
+		val remainder = ((value.toDouble * multiplier.toDouble) % divisor.toDouble).toInt
+		if (remainder % factor == 0) array += remainder
+		generateList(remainder, remaining, multiplier, factor, array)
 	}
 
 	// Note, 2147483647 is the maximum value you can store in an Int
