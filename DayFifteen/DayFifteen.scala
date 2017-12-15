@@ -7,42 +7,28 @@ object DayFifteen {
 	}
 
 	def solveTwo(): Unit = {
-		val aList = generateList(65,   5000000, 16807, 4, ArrayBuffer())
-		val bList = generateList(8921, 5000000, 48271, 8, ArrayBuffer())
-
-		println("Got lists")
-		println("A " + aList.length + " B " + bList.length)
-
-		val clashingIndexes = for {
-			i <- 0 to Math.min(aList.length, bList.length) - 1
-			if (aList(i).toBinaryString.takeRight(16) == bList(i).toBinaryString.takeRight(16))
-		} yield 1
-
-		println("Sum " + clashingIndexes.sum)
+		println("Num matches " + solveTwoStep(699, 124, 0, 0))
 	}
 
 	@annotation.tailrec
-	def generateList(value: Int, remaining: Int, multiplier: Int, factor: Int, array: ArrayBuffer[Int]): ArrayBuffer[Int] = {
-		if(array.length > remaining) return array
-		if(array.length % 1000 == 0) println("" + array.length)
-		val divisor = 2147483647
-		val remainder = ((value.toDouble * multiplier.toDouble) % divisor.toDouble).toInt
-		if (remainder % factor == 0) array += remainder
-		generateList(remainder, remaining, multiplier, factor, array)
+	def solveTwoStep(aValue: Int, bValue: Int, counter: Int, numPairs: Int): Int = {
+		if(counter == 5000000) return numPairs
+		val aNewValue = generateNextValue(aValue, 16807, 4, true)
+		val bNewValue = generateNextValue(bValue, 48271, 8, true)
+		val newNumPairs = if(aNewValue.toBinaryString.takeRight(16) == bNewValue.toBinaryString.takeRight(16)) {
+			numPairs + 1	
+		} else {
+			numPairs
+		}
+		solveTwoStep(aNewValue, bNewValue, counter + 1, newNumPairs) 
 	}
 
-	// Note, 2147483647 is the maximum value you can store in an Int
-	// so you need to cast up to double to stop overflow.
 	@annotation.tailrec
-	def solveOneStep(aValue: Int, bValue: Int, remaining: Int, counter: Int): Int = {
-		if(remaining <= 0) return counter
+	def generateNextValue(currValue: Int, multiplier: Int, factor: Int, firstPass: Boolean): Int = {
+		if(!firstPass && currValue % factor == 0) return currValue
 		val divisor = 2147483647
-		val aRemainder = ((aValue.toDouble * 16807) % divisor.toDouble).toInt
-		val bRemainder = ((bValue.toDouble * 48271) % divisor.toDouble).toInt
-		val aBinary = aRemainder.toBinaryString.takeRight(16)
-		val bBinary = bRemainder.toBinaryString.takeRight(16)
-		val countIncrement = if(aBinary == bBinary){ 1 } else { 0 }
-		solveOneStep(aRemainder.toInt, bRemainder.toInt, remaining - 1, counter + countIncrement)
+		val remainder = ((currValue.toDouble * multiplier.toDouble) % divisor.toDouble).toInt
+		generateNextValue(remainder, multiplier, factor, false)	
 	}
 
 }
