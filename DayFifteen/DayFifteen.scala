@@ -1,5 +1,4 @@
 
-
 object DayFifteen {
 
 	def main(args: Array[String]): Unit = {
