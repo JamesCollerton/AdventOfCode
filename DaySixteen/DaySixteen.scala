@@ -6,14 +6,40 @@ object DaySixteen {
 
 	def main(args: Array[String]): Unit = {
 		val input = Utils.readIn("DaySixteenInput.txt")(0)
-		solveOne(input)
+		solveTwo(input)
 	}
 
-	def solveOne(danceMoves: Array[String]): Unit = {
-		val positions = ('a' to 'p').toArray	
-		println("New position " + solveOneStep(positions, danceMoves).mkString(""))
+	def solveTwo(danceMoves: Array[String]): Unit = {
+		val positions = ('a' to 'p').toArray
+		//val newPositions = solveOneStep(positions, danceMoves).mkString("") 
+		//val positionChangeArray = positions.map(newPositions.indexOf(_)).toArray
+		//val finalPositions = solveTwoStep(positions, positionChangeArray, 2)
+		//println("Final positions " + finalPositions.mkString(","))
+		solveTwoStep(positions, danceMoves, 5000000)
 	}
 
+	@annotation.tailrec
+	def solveTwoStep(positions: Array[Char], danceMoves: Array[String], counter: Int): Array[Char] = {
+		if(counter == 0) return positions
+		if(counter % 10 == 0) println("Counter " + counter)
+		val newPositions = solveOneStep(positions, danceMoves)
+		solveTwoStep(newPositions, danceMoves, counter - 1)
+	}
+
+	def solveTwoStep(positions: Array[Char], positionChangeArray: Array[Int], counter: Int): Array[Char] = {
+		if(counter == 0) return positions
+		val newPositions = rearrange(positions, positionChangeArray)
+		println("New positions " + newPositions.mkString(","))
+		solveTwoStep(newPositions, positionChangeArray, counter - 1)
+	}
+
+	def rearrange(positions: Array[Char], positionChangeArray: Array[Int]): Array[Char] = {
+		val newPositions = new Array[Char](positions.length)
+		(0 to positions.length - 1).foreach(i => newPositions(i) = positions(positionChangeArray(i)))
+		newPositions	
+	}
+
+	@annotation.tailrec
 	def solveOneStep(position: Array[Char], danceMoves: Array[String]): Array[Char] = {
 		if(danceMoves.length <= 0) return position
 		val danceMove = danceMoves(0)
