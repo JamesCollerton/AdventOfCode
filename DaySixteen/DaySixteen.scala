@@ -22,20 +22,11 @@ object DaySixteen {
 			val spinSize = (danceMove.tail.toString.toInt % position.length)
 			val positionFirstHalf = position.slice(0, position.length - spinSize)
 			val positionSecondHalf = position.slice(position.length - spinSize, position.length)
-			println()
-			println("Raw Spin Size " + danceMove.tail) 
-			println("Mod Spin Size " + spinSize)
-			println(position.mkString(","))
-			println(positionFirstHalf.mkString(","))
-			println(positionSecondHalf.mkString(","))
-			println("Result " + (positionSecondHalf ++ positionFirstHalf).mkString(","))
 			positionSecondHalf ++ positionFirstHalf
 		} else if (danceMove.charAt(0) == 'x') {
-		//	println("Swapping by Index")
 			val programIndex = danceMove.slice(1, danceMove.length).split("/").map(_.trim.toInt)
 			indexSwap(programIndex(0), programIndex(1), position)
 		} else if (danceMove.charAt(0) == 'p') {
-		//	println("Swapping by Character")
 			val programCharacters = danceMove.slice(1, danceMove.length).split("/").map(_.trim.charAt(0))
 			indexSwap(position.indexOf(programCharacters(0)), position.indexOf(programCharacters(1)), position)
 		} else {
@@ -43,8 +34,8 @@ object DaySixteen {
 			position
 		}
 
-		println("New position " + newPosition.mkString(","))
-		println()
+		//println()
+		//println("New position " + newPosition.mkString(","))
 
 		solveOneStep(newPosition, danceMoves.tail)
 	}
