@@ -11,32 +11,22 @@ object DaySixteen {
 
 	def solveTwo(danceMoves: Array[String]): Unit = {
 		val positions = ('a' to 'p').toArray
-		//val newPositions = solveOneStep(positions, danceMoves).mkString("") 
-		//val positionChangeArray = positions.map(newPositions.indexOf(_)).toArray
-		//val finalPositions = solveTwoStep(positions, positionChangeArray, 2)
-		//println("Final positions " + finalPositions.mkString(","))
-		solveTwoStep(positions, danceMoves, 5000000)
+		println("Solved " + solveTwoStep(positions, danceMoves, Array[Array[Char]]()).mkString(""))
 	}
 
+	// We essentially just want to track when it gets into a loop.
 	@annotation.tailrec
-	def solveTwoStep(positions: Array[Char], danceMoves: Array[String], counter: Int): Array[Char] = {
-		if(counter == 0) return positions
-		if(counter % 10 == 0) println("Counter " + counter)
+	def solveTwoStep(positions: Array[Char], danceMoves: Array[String], donePositions: Array[Array[Char]]): Array[Char] = {
+		if(donePositions.map(_.mkString("")).contains(positions.mkString(""))) {
+			val firstIndex = donePositions.map(_.mkString("")).indexOf(positions.mkString(""))
+			val gap = donePositions.length - firstIndex
+			val remainingMoves = 1000000000 - donePositions.length
+			val positionIndex = remainingMoves % gap
+			return donePositions(positionIndex)
+		}
+		val newDonePositions = donePositions :+ positions.clone
 		val newPositions = solveOneStep(positions, danceMoves)
-		solveTwoStep(newPositions, danceMoves, counter - 1)
-	}
-
-	def solveTwoStep(positions: Array[Char], positionChangeArray: Array[Int], counter: Int): Array[Char] = {
-		if(counter == 0) return positions
-		val newPositions = rearrange(positions, positionChangeArray)
-		println("New positions " + newPositions.mkString(","))
-		solveTwoStep(newPositions, positionChangeArray, counter - 1)
-	}
-
-	def rearrange(positions: Array[Char], positionChangeArray: Array[Int]): Array[Char] = {
-		val newPositions = new Array[Char](positions.length)
-		(0 to positions.length - 1).foreach(i => newPositions(i) = positions(positionChangeArray(i)))
-		newPositions	
+		solveTwoStep(newPositions, danceMoves, newDonePositions)
 	}
 
 	@annotation.tailrec
