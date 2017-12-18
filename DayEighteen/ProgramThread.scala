@@ -31,8 +31,6 @@ class ProgramThread(startNum: Double, instructionsInput: ArrayBuffer[Instruction
 		val amountValue = getAmountValue(registers, currInstruction.amount)
 		val currentValue = getAmountValue(registers, currInstruction.register)
 		
-//		println("" + startNum + ": " + "Current registers " + registers.map(x => "(" + x._1 +"," + x._2 +")").mkString(", ")) 
-
 		// Setting current register
 		if(registers.contains(currInstruction.register)) {
 			registers(currInstruction.register) = currInstruction.instruction match {
@@ -44,9 +42,6 @@ class ProgramThread(startNum: Double, instructionsInput: ArrayBuffer[Instruction
 				case _ => registers(currInstruction.register)
 			}
 		}
-
-//		println("" + startNum + ": " + "Current registers " + registers.map(x => "(" + x._1 +"," + x._2 +")").mkString(", ")) 
-
 
 		// Do we end
 		if(isWaiting && otherThread.isWaiting) {
@@ -65,14 +60,6 @@ class ProgramThread(startNum: Double, instructionsInput: ArrayBuffer[Instruction
 			case "jgz" => if(currentValue > 0) currPosition + amountValue.toInt else currPosition + 1
 			case _ => currPosition + 1
 		}
-
-//		println()
-//		println("" + startNum)
-//		currInstruction.printline
-//		println("" + startNum + ": " + "Register " + currInstruction.instruction)
-		//println("" + startNum + ": " + "New register value " + registers(currInstruction.register))
-//		println("" + startNum + ": " + "Next position " + nextPosition)
-//		println("" + startNum + ": " + "Current registers " + registers.map(x => "(" + x._1 +"," + x._2 +")").mkString(", ")) 
 
 		solveOneStep(registers, nextPosition, instructions)
 	}	
