@@ -12,11 +12,11 @@ object DayEighteen {
 	}
 
 	def solveOne(instructions: ArrayBuffer[Instruction]): Unit = {
-		println("Last sound " + solveOneStep(new HashMap[String, Int], 0, 0, instructions))
+		println("Last sound " + solveOneStep(new HashMap[String, Double], 0, 0, instructions))
 	}
 
 	@annotation.tailrec
-	def solveOneStep(registers: HashMap[String, Int], currPosition: Int, lastSound: Int, instructions: ArrayBuffer[Instruction]): Int = {
+	def solveOneStep(registers: HashMap[String, Double], currPosition: Int, lastSound: Double, instructions: ArrayBuffer[Instruction]): Double = {
 		// If we're off the edge
 		if(currPosition < 0 || currPosition >= instructions.length) return lastSound
 
@@ -49,7 +49,7 @@ object DayEighteen {
 
 		// Setting next position
 		val nextPosition = currInstruction.instruction match {
-			case "jgz" => if(currentValue > 0) currPosition + amountValue else currPosition + 1
+			case "jgz" => if(currentValue > 0) currPosition + amountValue.toInt else currPosition + 1
 			case _ => currPosition + 1
 		}
 
@@ -70,9 +70,9 @@ object DayEighteen {
 		solveOneStep(registers, nextPosition, newLastSound, instructions)
 	}	
 
-	def getAmountValue(registers: HashMap[String, Int], currInstruction: Instruction): Int = {
+	def getAmountValue(registers: HashMap[String, Double], currInstruction: Instruction): Double = {
 		val amountValue = try {
-			currInstruction.amount.toInt
+			currInstruction.amount.toDouble
 		} catch {
 			case _: Throwable => {
 				val register = currInstruction.amount
