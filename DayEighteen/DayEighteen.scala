@@ -15,14 +15,14 @@ object DayEighteen {
 
 	def solveOne(instructions: ArrayBuffer[Instruction]): Unit = {
 		
-		val programZeroQueue = new Queue[Int]
-		val programOneQueue = new Queue[Int]
-
-		val runnableZero = new ProgramThread(0, instructions, programOneQueue, programZeroQueue) 
+		val runnableZero = new ProgramThread(0.0, instructions) 
 		val threadZero = new Thread(runnableZero)
 		
-		val runnableOne = new ProgramThread(0, instructions, programZeroQueue, programOneQueue) 
+		val runnableOne = new ProgramThread(1.0, instructions) 
 		val threadOne = new Thread(runnableOne)
+
+		runnableZero.setOtherThread(runnableOne)
+		runnableOne.setOtherThread(runnableZero)
 		
 		threadZero.start()
 		threadOne.start()

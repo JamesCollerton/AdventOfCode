@@ -6,43 +6,58 @@ import scala.collection.mutable.Queue
 import scala.collection.mutable.HashMap
 import scala.collection.mutable.ArrayBuffer
 
-class ProgramThread(startNum: Double, instructionsInput: ArrayBuffer[Instruction], consumerQueue: Queue[Int], producerQueue: Queue[Int]) extends Runnable {
+class ProgramThread(startNum: Double, instructionsInput: ArrayBuffer[Instruction]) extends Runnable {
 
-	var programCounter = 0;
+	var programCounter = 0
+	var isWaiting = false;
+	var otherThread: ProgramThread = null
+	
+	val queue = new Queue[String];
 
 	def run(): Unit = {
-		println("Test thread " + solveOneStep(HashMap("p" -> startNum), 0, 0, instructionsInput))
+		println("Thread " + startNum + ": " + solveOneStep(HashMap("p" -> startNum), 0, instructionsInput))
 	}
 
 	@annotation.tailrec
-	private def solveOneStep(registers: HashMap[String, Double], currPosition: Int, lastSound: Double, instructions: ArrayBuffer[Instruction]): Double = {
+	private def solveOneStep(registers: HashMap[String, Double], currPosition: Int, instructions: ArrayBuffer[Instruction]): Double = {
+		
 		// If we're off the edge
-		if(currPosition < 0 || currPosition >= instructions.length) return lastSound
+		if(currPosition < 0 || currPosition > instructions.length) return programCounter
 
 		// Get current instruction
 		val currInstruction = instructions(currPosition)
 
-		// If register never seen before then add.
-		if(!registers.contains(currInstruction.register)) registers(currInstruction.register) = 0
-
 		// Get amount and current value
-		val amountValue = getAmountValue(registers, currInstruction)
-		val currentValue = registers(currInstruction.register)
+		val amountValue = getAmountValue(registers, currInstruction.amount)
+		val currentValue = getAmountValue(registers, currInstruction.register)
+		
+//		println("" + startNum + ": " + "Current registers " + registers.map(x => "(" + x._1 +"," + x._2 +")").mkString(", ")) 
 
 		// Setting current register
-		registers(currInstruction.register) = currInstruction.instruction match {
-			case "set" => amountValue
-			case "add" => currentValue + amountValue
-			case "mul" => currentValue * amountValue
-			case "mod" => currentValue % amountValue
-			case "rcv" => if(currentValue != 0) lastSound else registers(currInstruction.register)
-			case _ => registers(currInstruction.register)
+		if(registers.contains(currInstruction.register)) {
+			registers(currInstruction.register) = currInstruction.instruction match {
+				case "set" => amountValue
+				case "add" => currentValue + amountValue
+				case "mul" => currentValue * amountValue
+				case "mod" => currentValue % amountValue
+				case "rcv" => getAmountValue(registers, receiveFunction())
+				case _ => registers(currInstruction.register)
+			}
+		}
+
+//		println("" + startNum + ": " + "Current registers " + registers.map(x => "(" + x._1 +"," + x._2 +")").mkString(", ")) 
+
+
+		// Do we end
+		if(isWaiting && otherThread.isWaiting) {
+			println("" + startNum + ": " + "Current registers " + registers.map(x => "(" + x._1 +"," + x._2 +")").mkString(", ")) 
+			return programCounter
 		}
 
 		// Setting last sound
-		val newLastSound = currInstruction.instruction match {
-			case "snd" => if(currentValue >0) currentValue else lastSound
-			case _ => lastSound
+		currInstruction.instruction match {
+			case "snd" => queue.enqueue(currentValue.toString)
+			case _ => ""
 		}
 
 		// Setting next position
@@ -51,29 +66,37 @@ class ProgramThread(startNum: Double, instructionsInput: ArrayBuffer[Instruction
 			case _ => currPosition + 1
 		}
 
-		println()
-		println(currInstruction.printline)
-		println("Register " + currInstruction.instruction)
-		println("New register value " + registers(currInstruction.register))
-		println("New last sound " + newLastSound)
-		println("Next position " + nextPosition)
-		println("Current registers " + registers.map(x => "(" + x._1 +"," + x._2 +")").mkString(", ")) 
-		
-		// Have we ended?
-		if(currInstruction.instruction == "rcv" && currentValue != 0 && lastSound != 0) {
-			println()
-			return lastSound
-		}
+//		println()
+//		println("" + startNum)
+//		currInstruction.printline
+//		println("" + startNum + ": " + "Register " + currInstruction.instruction)
+		//println("" + startNum + ": " + "New register value " + registers(currInstruction.register))
+//		println("" + startNum + ": " + "Next position " + nextPosition)
+//		println("" + startNum + ": " + "Current registers " + registers.map(x => "(" + x._1 +"," + x._2 +")").mkString(", ")) 
 
-		solveOneStep(registers, nextPosition, newLastSound, instructions)
+		solveOneStep(registers, nextPosition, instructions)
 	}	
 
-	def getAmountValue(registers: HashMap[String, Double], currInstruction: Instruction): Double = {
+	def receiveFunction(): String = {
+		if(otherThread.queue.length > 0) {
+			programCounter += 1
+			isWaiting = false
+			return otherThread.queue.dequeue()
+		}
+		Thread.sleep(100)
+		isWaiting = true
+		if(otherThread.isWaiting) {
+			return "!"
+		}
+		receiveFunction()
+	}
+
+	def getAmountValue(registers: HashMap[String, Double], amount: String): Double = {
 		val amountValue = try {
-			currInstruction.amount.toDouble
+			amount.toDouble
 		} catch {
 			case _: Throwable => {
-				val register = currInstruction.amount
+				val register = amount
 				if(register != null) {
 					if(!registers.contains(register)) registers(register) = 0
 					registers(register)
@@ -85,6 +108,8 @@ class ProgramThread(startNum: Double, instructionsInput: ArrayBuffer[Instruction
 		amountValue
 	}
 
-	def getProgramCounter(): Int = programCounter
+	def setOtherThread(programThread: ProgramThread): Unit = {
+		this.otherThread = programThread
+	}
 
 }
