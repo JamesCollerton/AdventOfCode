@@ -1,16 +1,17 @@
+package ProgramThread
+
 import Instruction._
 
 import scala.collection.mutable.Queue
 import scala.collection.mutable.HashMap
 import scala.collection.mutable.ArrayBuffer
 
-class ProgramThread(startNum: Double, instructionsInput: ArrayBuffer[Instruction], consumerQueue: Queue[Int]) extends Runnable {
+class ProgramThread(startNum: Double, instructionsInput: ArrayBuffer[Instruction], consumerQueue: Queue[Int], producerQueue: Queue[Int]) extends Runnable {
 
 	var programCounter = 0;
-	var waiting = false;
 
 	def run(): Unit = {
-		println("Test thread " + solveOneStep(new HashMap[String, Double], 0, 0, instructionsInput))
+		println("Test thread " + solveOneStep(HashMap("p" -> startNum), 0, 0, instructionsInput))
 	}
 
 	@annotation.tailrec
