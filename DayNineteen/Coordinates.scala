@@ -1,4 +1,4 @@
 package Coordinates
 
-class Coordinates(x: Int, y: Int)
+class Coordinates(val x: Int, val y: Int)
 

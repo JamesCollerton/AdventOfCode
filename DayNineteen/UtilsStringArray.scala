@@ -15,9 +15,12 @@ object Utils {
 			val rows = ArrayBuffer[Array[String]]()
 
 			for (line <- resource.getLines) {
-				rows += line.split("").map(_.trim)
+				rows += "" +: line.split("").map(_.trim) :+ ""
 			}
 
+			val blankRow = Array.fill(rows(0).length)("")
+			
+			rows += blankRow
 			//printRows(rows)
 
 			rows
