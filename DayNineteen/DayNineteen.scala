@@ -14,21 +14,21 @@ object DayNineteen {
 		val start = findStart(maze)
 		println("Start " + start)
 		val characterList = solveOneStep(maze, new Coordinates(start, 0), new Coordinates(0, 1), new ArrayBuffer[String](), 0)
-		println("Character list " + characterList.mkString(""))
+		println("Character list " + characterList)
 	}
 
-	def solveOneStep(maze: ArrayBuffer[Array[String]], position: Coordinates, direction: Coordinates, characterList: ArrayBuffer[String], counter: Int): ArrayBuffer[String] = {
+	def solveOneStep(maze: ArrayBuffer[Array[String]], position: Coordinates, direction: Coordinates, characterList: ArrayBuffer[String], counter: Int): Int = {
 
 		// If at edge then return
 		if(	position.x + direction.x >= maze(0).length ||
 			position.x + direction.x < 0 ||
 			position.y + direction.y >= maze.length ||
 			position.y + direction.y < 0 			) {
-				return characterList		
+				return counter	
 		}
 
 		// If on a blank space then return
-		if( maze(position.y + direction.y)(position.x + direction.x) == "" ) return characterList
+		if( maze(position.y + direction.y)(position.x + direction.x) == "" ) return counter
 
 		// Go in current direction
 		val newPosition = new Coordinates(position.x + direction.x, position.y + direction.y)
