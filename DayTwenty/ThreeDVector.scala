@@ -13,3 +13,10 @@ class PropertiesVector(val p: ThreeDVector[Double], val v: ThreeDVector[Double],
 	}
 
 }
+
+object CoefficientCalculator {
+
+//	def calculateCoefficient(propVec: PropertiesVector)(f: ThreeDVector[Double] => Double): PropertiesVector = {
+//		new PropertiesVector(f(propVec), f(propVec), f(propVec))
+//	}
+}
