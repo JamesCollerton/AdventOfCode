@@ -2,7 +2,7 @@ import Utils._
 import ThreeDVector._
 
 import scala.collection.mutable.ArrayBuffer
-import scala.collection.mutable.ListMap
+import scala.collection.mutable.LinkedHashMap
 
 object DayTwenty {
 
@@ -14,8 +14,6 @@ object DayTwenty {
 
 	def solveOne(propertiesVectors: ArrayBuffer[PropertiesVector]): Unit = {
 	
-		// Index of particle with lowest acceleration. Fluke because there's only one
-		// particle with min acceleration.	
 		println("Min acceleration " + propertiesVectors.map(_.getAcceleration()).zipWithIndex.min._2)
 
 	}
@@ -38,7 +36,7 @@ object DayTwenty {
 
 	def solveTwo(propertiesVectors: ArrayBuffer[PropertiesVector]): Unit = {
 
-		val collisions = new ListMap[Int, (Int, Int)]
+		val collisions = new LinkedHashMap[Int, (Int, Int)]
 
 		// Calculate every possible collision between two particles
 		for(i <- 0 to propertiesVectors.length - 1) {
@@ -73,44 +71,32 @@ object DayTwenty {
 					val solnNeg = calculateSolution(a, b, c)(negSolnFunc)
 					
 					if(solnPos.x == solnPos.y && solnPos.y == solnPos.z && !solnPos.x.isInfinite && solnPos.x >= 0) {
-					//	println("Solution " + solnPos.x + ", " + solnPos.y + ", " + solnPos.z)
 						collisions(solnPos.x.toInt) = (i, j)	
 					} else if(solnNeg.x == solnNeg.y && solnNeg.y == solnNeg.z && !solnNeg.x.isInfinite && solnNeg.x >= 0) {
-					//	println("Solution " + solnNeg.x + ", " + solnNeg.y + ", " + solnNeg.z)
 						collisions(solnNeg.x.toInt) = (i, j)
 					}
 
-					
-	
-					// [-b +/- sqrt(b^2 -4ac)] / 2a	
-					//val solnPosx = (-b.x + Math.sqrt(Math.pow(b.x, 2) - 4 * a.x * c.x)) / 2 * a.x
-					//val solnPosy = (-b.y + Math.sqrt(Math.pow(b.y, 2) - 4 * a.y * c.y)) / 2 * a.y
-					//val solnPosz = (-b.z + Math.sqrt(Math.pow(b.z, 2) - 4 * a.z * c.z)) / 2 * a.z
-
-					//println()
-					//if(2.0 == 2.0) println("OK")
-					//if(solnPosx == solnPosy && solnPosy == solnPosz) {
-					//	println("Here")
-					//	println("" + solnPos.x + ", " + solnPos.y + ", " + solnPos.z)
-					//	println("Time solutions " + solnPosx + ", " + solnPosy + ", " + solnPosz)
-					//}
-					
-					//val solnNegx = (-b.x - Math.sqrt(Math.pow(b.x, 2) - 4 * a.x * c.x)) / 2 * a.x
-					//val solnNegy = (-b.y - Math.sqrt(Math.pow(b.y, 2) - 4 * a.y * c.y)) / 2 * a.y
-					//val solnNegz = (-b.z - Math.sqrt(Math.pow(b.z, 2) - 4 * a.z * c.z)) / 2 * a.z
-
-					//if(solnNegx == solnNegy && solnNegy == solnNegz) {
-					//	println("Here")
-					//	println("Time solutions " + solnPosx + ", " + solnPosy + ", " + solnPosz)
-					//	println("" + i + ", " + j)
-					//}
 				}
 			}
 		}
 
 		val collidedParticles = new ArrayBuffer[Int]()
-		val sortedCollisions = ListMap(collisions.toSeq.sortWith(_._1 < _._1):_*)
-		sortedCollisions.foreach(collision => println(collision))
+		val sortedCollisions = LinkedHashMap(collisions.toSeq.sortBy(_._1):_*)
+		val numCollided = sortedCollisions.map{ case (k, v) => 
+			println("Key " + k + " Value " + v)
+			if(!collidedParticles.contains(v._1) && !collidedParticles.contains(v._2)) {
+				collidedParticles += v._1
+				collidedParticles += v._2
+				1
+			} else {
+				0
+			}
+		}.sum
+
+		println	
+		//numCollided.mkString(" ")
+
+		println("Solution " + (propertiesVectors.length - numCollided))
 
 	} 
 
