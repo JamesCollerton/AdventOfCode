@@ -1,14 +1,14 @@
 package ThreeDVector
 
-class ThreeDVector(val x: Int, val y: Int, val z: Int)
+class ThreeDVector[A](val x: A, val y: A, val z: A)
 
-class PropertiesVector(val p: ThreeDVector, val v: ThreeDVector, val a: ThreeDVector) {
+class PropertiesVector(val p: ThreeDVector[Double], val v: ThreeDVector[Double], val a: ThreeDVector[Double]) {
 
-	def getAcceleration(): Int = {
+	def getAcceleration(): Double = {
 		Math.abs(a.x) + Math.abs(a.y) + Math.abs(a.z)
 	}
 
-	def getPositionDistance(): Int = {
+	def getPositionDistance(): Double = {
 		Math.abs(p.x) + Math.abs(p.y) + Math.abs(p.z)
 	}
 

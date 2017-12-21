@@ -20,7 +20,7 @@ object Utils {
 				// Split by space:
 				val vectors = line.split(" ").map(_.trim)
 				val vectorContents = vectors.map(str => str.slice(str.indexOf("<") + 1, str.indexOf(">")).split(","))
-				val vectorObjects = vectorContents.map(arr => new ThreeDVector(arr(0).toInt, arr(1).toInt, arr(2).toInt))
+				val vectorObjects = vectorContents.map(arr => new ThreeDVector(arr(0).toDouble, arr(1).toDouble, arr(2).toDouble))
 				val propertiesVector = new PropertiesVector(vectorObjects(0), vectorObjects(1), vectorObjects(2))
 				rows += propertiesVector
 			}
