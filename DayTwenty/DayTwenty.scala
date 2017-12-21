@@ -2,6 +2,7 @@ import Utils._
 import ThreeDVector._
 
 import scala.collection.mutable.ArrayBuffer
+import scala.collection.mutable.ListMap
 
 object DayTwenty {
 
@@ -25,10 +26,19 @@ object DayTwenty {
 		val z = f(vecOne.a.z, vecTwo.a.z, vecOne.v.z, vecTwo.v.z, vecOne.p.z, vecTwo.p.z)
 		new ThreeDVector(x, y, z)
 	}
+	
+	def calculateSolution(a: ThreeDVector[Double], b: ThreeDVector[Double], c: ThreeDVector[Double])(f: (Double, Double, Double) => Double): ThreeDVector[Double] = {
+		val x = f(a.x, b.x, c.x)
+		val y = f(a.y, b.y, c.y)
+		val z = f(a.z, b.z, c.z)
+		new ThreeDVector(x, y, z)
+	}
 
 	// All functions will be of the form a1, a2, v1, v2, p1, p2
 
 	def solveTwo(propertiesVectors: ArrayBuffer[PropertiesVector]): Unit = {
+
+		val collisions = new ListMap[Int, (Int, Int)]
 
 		// Calculate every possible collision between two particles
 		for(i <- 0 to propertiesVectors.length - 1) {
@@ -51,45 +61,56 @@ object DayTwenty {
 						p1 - p2
 					}
 					val c = calculateCoefficient(vecOne, vecTwo)(cFunc)
-					//val ax = 0.5 * vecOne.a.x - 0.5 * vecTwo.a.x
-					//val ay = 0.5 * vecOne.a.y - 0.5 * vecTwo.a.y
-					//val az = 0.5 * vecOne.a.z - 0.5 * vecTwo.a.z
-					//val a = new ThreeDVector(ax, ay, az)
 
-					//val bx = 0.5 * (vecOne.a.x - vecTwo.a.x) + (vecOne.v.x - vecTwo.v.x)
-					//val by = 0.5 * (vecOne.a.y - vecTwo.a.y) + (vecOne.v.y - vecTwo.v.y)
-					//val bz = 0.5 * (vecOne.a.z - vecTwo.a.z) + (vecOne.v.z - vecTwo.v.z)
-					//val b = new ThreeDVector(bx, by, bz)
+					def posSolnFunc(a: Double, b: Double, c: Double): Double = {
+						(-b + Math.sqrt(Math.pow(b, 2) - 4 * a * c)) / (2 * a)
+					}
+					val solnPos = calculateSolution(a, b, c)(posSolnFunc)
 
-					//val cx = vecOne.p.x - vecTwo.p.x
-					//val cy = vecOne.p.y - vecTwo.p.y
-					//val cz = vecOne.p.z - vecTwo.p.z
-					//val c = new ThreeDVector(cx, cy, cz)
+					def negSolnFunc(a: Double, b: Double, c: Double): Double = {
+						(-b - Math.sqrt(Math.pow(b, 2) - 4 * a * c)) / (2 * a)
+					}
+					val solnNeg = calculateSolution(a, b, c)(negSolnFunc)
+					
+					if(solnPos.x == solnPos.y && solnPos.y == solnPos.z && !solnPos.x.isInfinite && solnPos.x >= 0) {
+					//	println("Solution " + solnPos.x + ", " + solnPos.y + ", " + solnPos.z)
+						collisions(solnPos.x.toInt) = (i, j)	
+					} else if(solnNeg.x == solnNeg.y && solnNeg.y == solnNeg.z && !solnNeg.x.isInfinite && solnNeg.x >= 0) {
+					//	println("Solution " + solnNeg.x + ", " + solnNeg.y + ", " + solnNeg.z)
+						collisions(solnNeg.x.toInt) = (i, j)
+					}
 
+					
+	
 					// [-b +/- sqrt(b^2 -4ac)] / 2a	
-					val solnPosx = (-b.x + Math.sqrt(Math.pow(b.x, 2) - 4 * a.x * c.x)) / 2 * a.x
-					val solnPosy = (-b.y + Math.sqrt(Math.pow(b.y, 2) - 4 * a.y * c.y)) / 2 * a.y
-					val solnPosz = (-b.z + Math.sqrt(Math.pow(b.z, 2) - 4 * a.z * c.z)) / 2 * a.z
+					//val solnPosx = (-b.x + Math.sqrt(Math.pow(b.x, 2) - 4 * a.x * c.x)) / 2 * a.x
+					//val solnPosy = (-b.y + Math.sqrt(Math.pow(b.y, 2) - 4 * a.y * c.y)) / 2 * a.y
+					//val solnPosz = (-b.z + Math.sqrt(Math.pow(b.z, 2) - 4 * a.z * c.z)) / 2 * a.z
 
 					//println()
 					//if(2.0 == 2.0) println("OK")
-					if(solnPosx == solnPosy && solnPosy == solnPosz) {
-						println("Here")
-						println("Time solutions " + solnPosx + ", " + solnPosy + ", " + solnPosz)
-					}
+					//if(solnPosx == solnPosy && solnPosy == solnPosz) {
+					//	println("Here")
+					//	println("" + solnPos.x + ", " + solnPos.y + ", " + solnPos.z)
+					//	println("Time solutions " + solnPosx + ", " + solnPosy + ", " + solnPosz)
+					//}
 					
-					val solnNegx = (-b.x - Math.sqrt(Math.pow(b.x, 2) - 4 * a.x * c.x)) / 2 * a.x
-					val solnNegy = (-b.y - Math.sqrt(Math.pow(b.y, 2) - 4 * a.y * c.y)) / 2 * a.y
-					val solnNegz = (-b.z - Math.sqrt(Math.pow(b.z, 2) - 4 * a.z * c.z)) / 2 * a.z
+					//val solnNegx = (-b.x - Math.sqrt(Math.pow(b.x, 2) - 4 * a.x * c.x)) / 2 * a.x
+					//val solnNegy = (-b.y - Math.sqrt(Math.pow(b.y, 2) - 4 * a.y * c.y)) / 2 * a.y
+					//val solnNegz = (-b.z - Math.sqrt(Math.pow(b.z, 2) - 4 * a.z * c.z)) / 2 * a.z
 
-					if(solnNegx == solnNegy && solnNegy == solnNegz) {
-						println("Here")
-						println("Time solutions " + solnPosx + ", " + solnPosy + ", " + solnPosz)
-						println("" + i + ", " + j)
-					}
+					//if(solnNegx == solnNegy && solnNegy == solnNegz) {
+					//	println("Here")
+					//	println("Time solutions " + solnPosx + ", " + solnPosy + ", " + solnPosz)
+					//	println("" + i + ", " + j)
+					//}
 				}
 			}
 		}
+
+		val collidedParticles = new ArrayBuffer[Int]()
+		val sortedCollisions = ListMap(collisions.toSeq.sortWith(_._1 < _._1):_*)
+		sortedCollisions.foreach(collision => println(collision))
 
 	} 
 
