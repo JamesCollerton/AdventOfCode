@@ -44,11 +44,26 @@ object DayTwenty {
 					val c = new ThreeDVector(cx, cy, cz)
 
 					// [-b +/- sqrt(b^2 -4ac)] / 2a	
-					//val solnPosx = -b.x + Math.sqrt(b.x^2 - 4 * a.x * c.x)
-					//val solnPosy = 
-					//val solnPosz = 
+					val solnPosx = (-b.x + Math.sqrt(Math.pow(b.x, 2) - 4 * a.x * c.x)) / 2 * a.x
+					val solnPosy = (-b.y + Math.sqrt(Math.pow(b.y, 2) - 4 * a.y * c.y)) / 2 * a.y
+					val solnPosz = (-b.z + Math.sqrt(Math.pow(b.z, 2) - 4 * a.z * c.z)) / 2 * a.z
 
-					//val solnNeg =
+					//println()
+					//if(2.0 == 2.0) println("OK")
+					if(solnPosx == solnPosy && solnPosy == solnPosz) {
+						println("Here")
+						println("Time solutions " + solnPosx + ", " + solnPosy + ", " + solnPosz)
+					}
+					
+					val solnNegx = (-b.x - Math.sqrt(Math.pow(b.x, 2) - 4 * a.x * c.x)) / 2 * a.x
+					val solnNegy = (-b.y - Math.sqrt(Math.pow(b.y, 2) - 4 * a.y * c.y)) / 2 * a.y
+					val solnNegz = (-b.z - Math.sqrt(Math.pow(b.z, 2) - 4 * a.z * c.z)) / 2 * a.z
+
+					if(solnNegx == solnNegy && solnNegy == solnNegz) {
+						println("Here")
+						println("Time solutions " + solnPosx + ", " + solnPosy + ", " + solnPosz)
+						println("" + i + ", " + j)
+					}
 				}
 			}
 		}
