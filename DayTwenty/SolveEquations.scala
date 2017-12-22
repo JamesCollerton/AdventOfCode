@@ -1,4 +1,3 @@
-import CoefficientCalculator._
 import PropertiesVector._
 
 import scala.collection.mutable.LinkedHashMap
@@ -7,7 +6,8 @@ import scala.collection.mutable.ArrayBuffer
 object SolveEquations {
 
 	def solveSingleEquation(a1: Double, a2: Double, v1: Double, v2: Double, p1: Double, p2: Double): (ArrayBuffer[Double], Boolean) = {
-		println("a1 " + a1 + ", a2 " + a2 + ", v1 " + v1 + ", v2 " + v2 + ", p1 " + p1 + ", p2 " + p2)
+//		println("a1 " + a1 + ", a2 " + a2 + ", v1 " + v1 + ", v2 " + v2 + ", p1 " + p1 + ", p2 " + p2)
+
 		// Solve quadratic equation
 		if(a1 != 0.0 || a2 != 0.0) {
 			val a = 0.5 * a1 - 0.5 * a2
@@ -15,11 +15,13 @@ object SolveEquations {
 			val c = p1 - p2
 			val tPos = (-b + Math.sqrt(Math.pow(b,2) - 4 * a * c)) / (2 * a)
 			val tNeg = (-b - Math.sqrt(Math.pow(b,2) - 4 * a * c)) / (2 * a)
-			(ArrayBuffer(tPos, tNeg).filter(_ % 1 == 0), false)
+			(ArrayBuffer(tPos, tNeg).filter(d => (d % 1) == 0), false)
+	
 		// Solve linear equation
 		} else if ((v1 - v2) != 0.0){
 			val t = (p2 - p1)/ (v1 - v2)
-			(ArrayBuffer(t).filter(_ % 1 == 0), false)
+			(ArrayBuffer(t).filter(d => (d % 1) == 0), false)
+		
 		// See if in same plane
 		} else if (p1 == p2){
 			(new ArrayBuffer[Double], true)
@@ -61,11 +63,11 @@ object SolveEquations {
 			xCollisionTimes.intersect(yCollisionTimes.intersect(zCollisionTimes))
 		}
 
-		println("Intersect times " + intersectTimes.mkString(", "))
+//		println("Intersect times " + intersectTimes.mkString(", "))
 
 		if(intersectTimes.length > 0) {
 			intersectTimes.foreach(t => {
-				println("Here " + t)
+//				println("Here " + t)
 				if(!collisions.contains(t.toInt)) collisions(t.toInt) = new ArrayBuffer[Int]
 				collisions(t.toInt) += i
 				collisions(t.toInt) += j
