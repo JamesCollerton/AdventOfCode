@@ -12,5 +12,14 @@ class PropertiesVector(val p: ThreeDVector[Double], val v: ThreeDVector[Double],
 		Math.abs(p.x) + Math.abs(p.y) + Math.abs(p.z)
 	}
 
+	def printVector(): Unit = {
+		print("p ")
+		p.printVector()
+		print("v ")
+		v.printVector()
+		print("a ")
+		a.printVector()
+	}
+
 }
 
