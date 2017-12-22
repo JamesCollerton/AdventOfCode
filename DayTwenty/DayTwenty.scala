@@ -10,7 +10,7 @@ import scala.collection.mutable.LinkedHashMap
 object DayTwenty {
 
 	def main(args: Array[String]): Unit = {
-		val input = Utils.readIn("DayTwentyTestInputTwo.txt")
+		val input = Utils.readIn("DayTwentyInput.txt")
 		solveOne(input)
 		solveTwo(input)
 	}

@@ -6,7 +6,7 @@ import scala.collection.mutable.ArrayBuffer
 
 object SolveEquations {
 
-	def solveSingleEquation(a1: Double, a2: Double, v1: Double, v2: Double, p1: Double, p2: Double): Stream[Double] = {
+	def solveSingleEquation(a1: Double, a2: Double, v1: Double, v2: Double, p1: Double, p2: Double): (ArrayBuffer[Double], Boolean) = {
 		println("a1 " + a1 + ", a2 " + a2 + ", v1 " + v1 + ", v2 " + v2 + ", p1 " + p1 + ", p2 " + p2)
 		// Solve quadratic equation
 		if(a1 != 0.0 || a2 != 0.0) {
@@ -15,44 +15,58 @@ object SolveEquations {
 			val c = p1 - p2
 			val tPos = (-b + Math.sqrt(Math.pow(b,2) - 4 * a * c)) / (2 * a)
 			val tNeg = (-b - Math.sqrt(Math.pow(b,2) - 4 * a * c)) / (2 * a)
-			tPos #:: tNeg #:: Stream.empty
+			(ArrayBuffer(tPos, tNeg).filter(_ % 1 == 0), false)
 		// Solve linear equation
 		} else if ((v1 - v2) != 0.0){
-			println("In linear")
 			val t = (p2 - p1)/ (v1 - v2)
-			t #:: Stream.empty
+			(ArrayBuffer(t).filter(_ % 1 == 0), false)
 		// See if in same plane
 		} else if (p1 == p2){
-			println("In stationary")
-			println("Here")
-			val infiniteTimeStream: Stream[Double] = {
-  				def loop(v: Double): Stream[Double] = v #:: loop(v + 1)
-  				loop(0)
-			}		
-			infiniteTimeStream
+			(new ArrayBuffer[Double], true)
 		} else {
-			Stream.Empty
+			(new ArrayBuffer[Double], false)
 		}
 
 	}
 
 	def solveQuadratic(vecOne: PropertiesVector, vecTwo: PropertiesVector, collisions: LinkedHashMap[Int, ArrayBuffer[Int]], i: Int, j: Int): Unit =  {
 
-		val xCollisionTimes = solveSingleEquation(vecOne.a.x, vecTwo.a.x, vecOne.v.x, vecTwo.v.x, vecOne.p.x, vecTwo.p.x)
-		val yCollisionTimes = solveSingleEquation(vecOne.a.y, vecTwo.a.y, vecOne.v.y, vecTwo.v.y, vecOne.p.y, vecTwo.p.y)
-		val zCollisionTimes = solveSingleEquation(vecOne.a.z, vecTwo.a.z, vecOne.v.z, vecTwo.v.z, vecOne.p.z, vecTwo.p.z)
+		val (xCollisionTimes, xCollisionInfinite) = solveSingleEquation(vecOne.a.x, vecTwo.a.x, vecOne.v.x, vecTwo.v.x, vecOne.p.x, vecTwo.p.x)
+		val (yCollisionTimes, yCollisionInfinite) = solveSingleEquation(vecOne.a.y, vecTwo.a.y, vecOne.v.y, vecTwo.v.y, vecOne.p.y, vecTwo.p.y)
+		val (zCollisionTimes, zCollisionInfinite) = solveSingleEquation(vecOne.a.z, vecTwo.a.z, vecOne.v.z, vecTwo.v.z, vecOne.p.z, vecTwo.p.z)
 
-		println()
-		//println(yCollisionTimes.length)
-		println("X " + xCollisionTimes.mkString(", "))
-		println("Y " + yCollisionTimes.mkString(", "))
-		println("Z " + zCollisionTimes.mkString(", "))
+		val intersectTimes = if(xCollisionInfinite && yCollisionInfinite && zCollisionInfinite) {
+			// Same spot, don't move	
+			ArrayBuffer(0.0)
+		} else if(xCollisionInfinite && yCollisionInfinite) {
+			// Only move on z axis
+			zCollisionTimes
+		} else if(xCollisionInfinite && zCollisionInfinite) {
+			// Only move on y axis
+			yCollisionTimes
+		} else if(yCollisionInfinite && zCollisionInfinite) {
+			// Only move on x axis
+			xCollisionTimes
+		} else if(xCollisionInfinite) {
+			// Move on y and z axes
+			yCollisionTimes.intersect(zCollisionTimes)
+		} else if(yCollisionInfinite) {
+			// Move on x and z axes
+			xCollisionTimes.intersect(zCollisionTimes)
+		} else if(zCollisionInfinite) {
+			// Move on x and y axes
+			xCollisionTimes.intersect(yCollisionTimes)
+		} else {
+			// Moving on all axes
+			xCollisionTimes.intersect(yCollisionTimes.intersect(zCollisionTimes))
+		}
 
-		// If we intersect on all three planes at once
-		val intersectTimes = xCollisionTimes.intersect(yCollisionTimes.intersect(zCollisionTimes)) 
+		println("Intersect times " + intersectTimes.mkString(", "))
+
 		if(intersectTimes.length > 0) {
 			intersectTimes.foreach(t => {
-				println(t)
+				println("Here " + t)
+				if(!collisions.contains(t.toInt)) collisions(t.toInt) = new ArrayBuffer[Int]
 				collisions(t.toInt) += i
 				collisions(t.toInt) += j
 			})
