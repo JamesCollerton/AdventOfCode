@@ -1,6 +1,12 @@
 package ThreeDVector
 
-class ThreeDVector[A](val x: A, val y: A, val z: A)
+class ThreeDVector[A](val x: A, val y: A, val z: A) {
+
+	def printVector(): Unit = {
+		println("" + x + ", " + y + ", " + z)
+	}
+
+}
 
 class PropertiesVector(val p: ThreeDVector[Double], val v: ThreeDVector[Double], val a: ThreeDVector[Double]) {
 

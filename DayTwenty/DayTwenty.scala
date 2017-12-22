@@ -7,7 +7,7 @@ import scala.collection.mutable.LinkedHashMap
 object DayTwenty {
 
 	def main(args: Array[String]): Unit = {
-		val input = Utils.readIn("DayTwentyInput.txt")
+		val input = Utils.readIn("DayTwentyTestInputTwo.txt")
 		solveOne(input)
 		solveTwo(input)
 	}
@@ -32,8 +32,6 @@ object DayTwenty {
 		new ThreeDVector(x, y, z)
 	}
 
-	// All functions will be of the form a1, a2, v1, v2, p1, p2
-
 	def solveTwo(propertiesVectors: ArrayBuffer[PropertiesVector]): Unit = {
 
 		val collisions = new LinkedHashMap[Int, ArrayBuffer[Int]]
@@ -49,7 +47,7 @@ object DayTwenty {
 						0.5 * a1 - 0.5 * a2
 					}
 					val a = calculateCoefficient(vecOne, vecTwo)(aFunc)
-
+	
 					def bFunc(a1: Double, a2: Double, v1: Double, v2: Double, p1: Double, p2: Double): Double = {
 						0.5 * (a1 - a2) + (v1 - v2)
 					}
@@ -69,7 +67,10 @@ object DayTwenty {
 						(-b - Math.sqrt(Math.pow(b, 2) - 4 * a * c)) / (2 * a)
 					}
 					val solnNeg = calculateSolution(a, b, c)(negSolnFunc)
-					
+				
+					println(solnPos.x + ", " + solnPos.y + ", " + solnPos.z);
+					println(solnNeg.x + ", " + solnNeg.y + ", " + solnNeg.z);
+	
 					if(solnPos.x == solnPos.y && solnPos.y == solnPos.z && !solnPos.x.isInfinite && solnPos.x >= 0) {
 						if(!collisions.contains(solnPos.x.toInt)) collisions(solnPos.x.toInt) = new ArrayBuffer[Int]()
 						collisions(solnPos.x.toInt) += i
