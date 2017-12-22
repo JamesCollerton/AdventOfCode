@@ -24,29 +24,12 @@ object SolveEquations {
 		} else if (p1 == p2){
 			(new ArrayBuffer[Double], true)
 		} else {
-			println("Uh oh")
 			(new ArrayBuffer[Double], false)
 		}
 
 	}
 
 	def solveQuadratic(vecOne: PropertiesVector, vecTwo: PropertiesVector, collisions: LinkedHashMap[Int, ArrayBuffer[Int]], i: Int, j: Int): Unit =  {
-
-		if(i == 12 || j == 396 || i == 396 || j == 12) {
-			println()
-			println("----------------------------------------")
-			println()
-
-			println("Vec One")
-			vecOne.printVector()
-
-			println()
-
-			println("Vec Two")
-			vecTwo.printVector()
-
-			println()
-		}	
 
 		val (xCollisionTimes, xCollisionInfinite) = solveSingleEquation(vecOne.a.x, vecTwo.a.x, vecOne.v.x, vecTwo.v.x, vecOne.p.x, vecTwo.p.x)
 		val (yCollisionTimes, yCollisionInfinite) = solveSingleEquation(vecOne.a.y, vecTwo.a.y, vecOne.v.y, vecTwo.v.y, vecOne.p.y, vecTwo.p.y)
@@ -78,23 +61,8 @@ object SolveEquations {
 			xCollisionTimes.intersect(yCollisionTimes.intersect(zCollisionTimes))
 		}
 
-		if(i == 12 || j == 396 || i == 396 || j == 12) {
-			
-			println("X collision " + xCollisionTimes.mkString(", "))
-			println("Y collision " + yCollisionTimes.mkString(", "))
-			println("Z collision " + zCollisionTimes.mkString(", "))			
-
-			println("Intersect times " + intersectTimes.mkString(", "))
-
-			println()
-
-			println("----------------------------------------")
-
-		}
-
 		if(intersectTimes.length > 0) {
 			intersectTimes.foreach(t => {
-//				println("Here " + t)
 				if(!collisions.contains(t.toInt)) collisions(t.toInt) = new ArrayBuffer[Int]
 				collisions(t.toInt) += i
 				collisions(t.toInt) += j

@@ -46,9 +46,6 @@ object DayTwenty {
 		val collidedParticles = new ArrayBuffer[Int]()
 		val sortedCollisions = LinkedHashMap(collisions.toSeq.sortBy(_._1):_*)
 		
-		val allCollisions = collisions.toSeq.flatMap(_._2).sortWith(_ < _)
-//		println("All collisions " + allCollisions.mkString(", "))
-
 		val numCollided = sortedCollisions.map{ case (time, particles) => 
 
 			val collidingParticles = particles.distinct.diff(collidedParticles.distinct)
@@ -61,13 +58,6 @@ object DayTwenty {
 			}
 
 		}.sum
-
-		val sequence = (0 to 538).toArray
-//		println("Sequence " + sequence.mkString(", "))
-//		println("Missing " + sequence.diff(collidedParticles).mkString(", "))
-//		println("Collided particles " + collidedParticles.sortWith(_ < _).mkString(", "))
-//		println("Num particles " + numParticles)
-//		println("Num collided " + collidedParticles.length)
 
 		println("Solution " + (numParticles - numCollided))
 
