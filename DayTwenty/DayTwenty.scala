@@ -36,7 +36,7 @@ object DayTwenty {
 
 	def solveTwo(propertiesVectors: ArrayBuffer[PropertiesVector]): Unit = {
 
-		val collisions = new LinkedHashMap[Int, (Int, Int)]
+		val collisions = new LinkedHashMap[Int, ArrayBuffer[Int]]
 
 		// Calculate every possible collision between two particles
 		for(i <- 0 to propertiesVectors.length - 1) {
@@ -71,9 +71,13 @@ object DayTwenty {
 					val solnNeg = calculateSolution(a, b, c)(negSolnFunc)
 					
 					if(solnPos.x == solnPos.y && solnPos.y == solnPos.z && !solnPos.x.isInfinite && solnPos.x >= 0) {
-						collisions(solnPos.x.toInt) = (i, j)	
+						if(!collisions.contains(solnPos.x.toInt)) collisions(solnPos.x.toInt) = new ArrayBuffer[Int]()
+						collisions(solnPos.x.toInt) += i
+						collisions(solnPos.x.toInt) += j
 					} else if(solnNeg.x == solnNeg.y && solnNeg.y == solnNeg.z && !solnNeg.x.isInfinite && solnNeg.x >= 0) {
-						collisions(solnNeg.x.toInt) = (i, j)
+						if(!collisions.contains(solnNeg.x.toInt)) collisions(solnNeg.x.toInt) = new ArrayBuffer[Int]()
+						collisions(solnNeg.x.toInt) += i
+						collisions(solnNeg.x.toInt) += j
 					}
 
 				}
@@ -82,19 +86,16 @@ object DayTwenty {
 
 		val collidedParticles = new ArrayBuffer[Int]()
 		val sortedCollisions = LinkedHashMap(collisions.toSeq.sortBy(_._1):_*)
-		val numCollided = sortedCollisions.map{ case (k, v) => 
-			println("Key " + k + " Value " + v)
-			if(!collidedParticles.contains(v._1) && !collidedParticles.contains(v._2)) {
-				collidedParticles += v._1
-				collidedParticles += v._2
-				1
+		val numCollided = sortedCollisions.map{ case (time, particles) => 
+			println("Key " + time + " Value " + particles.mkString(","))
+			val collidingParticles = particles.distinct.diff(collidedParticles.distinct)
+			if(collidingParticles.length >= 2) {
+				collidedParticles ++ collidingParticles
+				collidingParticles.length
 			} else {
-				0
+				0		
 			}
 		}.sum
-
-		println	
-		//numCollided.mkString(" ")
 
 		println("Solution " + (propertiesVectors.length - numCollided))
 

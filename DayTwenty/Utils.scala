@@ -25,7 +25,7 @@ object Utils {
 				rows += propertiesVector
 			}
 
-			//printRows(rows)
+			printRows(rows)
 
 			rows
 		}
