@@ -1,6 +1,7 @@
 package Utils
 
 import ThreeDVector._
+import PropertiesVector._
 
 import scala.io.Source
 import scala.collection.mutable.ArrayBuffer
