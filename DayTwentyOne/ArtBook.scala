@@ -7,6 +7,7 @@ class ArtBook(val artBookString: String) {
 	// The grid we are matching
 	val gridInput = createGridInput(artBookString)
 	val gridOutput = createGridOutput(artBookString)
+	val allMatchingGrids = createAllMatchingGrids(gridInput)
 
 	def createGridInput(str: String): Array[Array[String]] = {
 		createGrid(str.split("=>")(0).trim)
@@ -18,6 +19,37 @@ class ArtBook(val artBookString: String) {
 
 	def createGrid(str: String): Array[Array[String]] = {
 		str.split("/").map(_.split(""))
+	}
+
+	def createAllMatchingGrids(inputGrid: Array[Array[String]]): ArrayBuffer[Array[Array[String]]] = {
+		val matchingGrids = ArrayBuffer(inputGrid)
+	
+		printInput()
+	
+		matchingGrids += symmetric(matchingGrids.last)
+		matchingGrids += flip(matchingGrids.last)
+		matchingGrids += symmetric(matchingGrids.last)
+		matchingGrids += flip(matchingGrids.last)
+		matchingGrids += symmetric(matchingGrids.last)
+		matchingGrids += flip(matchingGrids.last)
+		matchingGrids += symmetric(matchingGrids.last)
+	
+		matchingGrids.distinct
+	}
+
+	def symmetric(grid: Array[Array[String]]): Array[Array[String]] = {
+		val reverseY = grid.reverse
+		val reverseXY = grid.map(row => row.reverse)
+		println()
+		reverseXY.foreach(row => println(row.mkString("")))
+		reverseXY
+	}
+
+	def flip(grid: Array[Array[String]]): Array[Array[String]] = {
+		val reverseY = grid.reverse
+		println()
+		reverseY.foreach(row => println(row.mkString("")))
+		reverseY
 	}
 
 	def printInput(): Unit = {
