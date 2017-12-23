@@ -19,11 +19,15 @@ object DayTwentyOne {
 	}
 
 	def solveOne(image: ArrayBuffer[Array[String]], artBookGrids: ArrayBuffer[ArtBook]): Unit = {
-		solveOneStep(image, artBookGrids, 5)
+		println("Sum " + solveOneStep(image, artBookGrids, 18))
 	}
 
-	def solveOneStep(image: ArrayBuffer[Array[String]], artBookGrids: ArrayBuffer[ArtBook], counter: Int): Unit = {
-		if(counter == 0) return
+	def sumGrid(grid: ArrayBuffer[Array[String]]): Int = {
+		grid.map(row => row.map(field => if(field == "#") 1 else 0).sum).sum
+	}
+
+	def solveOneStep(image: ArrayBuffer[Array[String]], artBookGrids: ArrayBuffer[ArtBook], counter: Int): Int = {
+		if(counter == 0) return sumGrid(image)
 		val imageSize = image.length;
 		val (imageDivisor, imageModder) = if (imageSize % 2 == 0) {
 			(imageSize / 2, 2)
@@ -33,11 +37,11 @@ object DayTwentyOne {
 		
 		println()
 		println("--------------------------------------------------------")
-		println()
-		println("Grid Information")
-		println("Image Size: " + imageSize)
-		println("Image Divisor: " + imageDivisor)
-		println("Image Modder: " + imageModder)
+		//println()
+		//println("Grid Information")
+		//println("Image Size: " + imageSize)
+		//println("Image Divisor: " + imageDivisor)
+		//println("Image Modder: " + imageModder)
 		println("Counter: " + counter)
 	
 		val grids = (0 to imageDivisor - 1).flatMap(i => {
@@ -53,13 +57,13 @@ object DayTwentyOne {
 			grids
 		})
 
-		println()
-		println("Grids")
-		grids.foreach(grid => {
-			println()
-			grid.foreach(row => println(row.mkString("")))
-		})
-		println()
+	//	println()
+	//	println("Grids")
+	//	grids.foreach(grid => {
+	//		println()
+	//		grid.foreach(row => println(row.mkString("")))
+	//	})
+	//	println()
 
 		// Calculate new grids
 		val newGrids = grids.map(grid => {
@@ -68,39 +72,43 @@ object DayTwentyOne {
 			matchedGrids(0).gridOutput
 		})
 
-		println()
-		println("Matched Grids")
-		newGrids.foreach(grid => {
-			println()
-			grid.foreach(row => println(row.mkString("")))
-		})
+	//	println()
+	//	println("Matched Grids")
+	//	newGrids.foreach(grid => {
+	//		println()
+	//		grid.foreach(row => println(row.mkString("")))
+	//	})
 
 		//Recombine grids
 		val newGrid = (0 to imageDivisor - 1).flatMap(i => {
 			
 			// First n grids
-			val nGrids = newGrids.slice(i * imageModder, (i + 1) * imageModder)
-			println()
-			println("N Grid Block")
-			println()
-			nGrids.foreach(grid => grid.foreach(row => println(row.mkString(""))))		
+			val nGrids = newGrids.slice(i * imageDivisor, (i + 1) * imageDivisor)
+		//	println()
+		//	println("N Grid Block")
+		//	println()
+		//	nGrids.foreach(grid => {
+		//		println()
+		//		grid.foreach(row => println(row.mkString("")))
+		//	})
 	
 			// Combine rows of first n grids
 			val nGridRows = (0 to nGrids(0).length - 1).map(j => {
-				println()
-				println("Row to print")
-				nGrids.foreach(grid => println(grid(j).mkString("")))
-				nGrids.flatMap(grid => grid(j)).toArray
+		//		println()
+		//		println("Row to print")
+				val newRow = nGrids.flatMap(grid => grid(j)).toArray
+		//		println(newRow.mkString(""))
+				newRow
 			})
 
 			nGridRows
 		}).to[ArrayBuffer]
 
-		println()
-		println("Recombined Grid")
-		println()
-		newGrid.foreach(row => println(row.mkString("")))
-		println()
+	//	println()
+	//	println("Recombined Grid")
+	//	println()
+	//	newGrid.foreach(row => println(row.mkString("")))
+	//	println()
 
 		println("--------------------------------------------------------")
 
