@@ -43,12 +43,19 @@ object DayTwentyOne {
 			grids
 		})
 
-		grids.foreach(grid => {
-			artBookGrids.foreach(artBookGrid => {
-				artBookGrid.compareGrid(grid)
-			})
-		})		
+		// Calculate new grids
+		val newGrid = grids.map(grid => {
+			val matchedGrids = artBookGrids.filter(artBookGrid => artBookGrid.compareGrid(grid))
+			if(matchedGrids.length != 1) println("In trouble")
+			matchedGrids(0).gridOutput
+		})
+
+		//Recombine grids
 
 	}
+
+//	def lookUpArtBook(grid: ArrayBuffer[Array[String]], artBookGrids: ArrayBuffer[ArtBook]): ArrayBuffer[Array[String]] = {
+//		artBookGrids.foreach(
+//	}
 
 }

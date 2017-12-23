@@ -34,33 +34,33 @@ class ArtBook(val artBookString: String) {
 
 	def compareGrid(grid: ArrayBuffer[Array[String]]): Boolean = {
 		val gridRows = grid
-		//val gridCols = (0 to grid.length - 1).map(i => grid.map(row => row(i)).toArray)
 		val inputRows = gridInput
 		val inputCols = (0 to gridInput.length - 1).map(i => gridInput.map(row => row(i)).toArray)
 
 		// Either the columns of the input grid are the same as the rows or the rows are.
-
-		val gridRowsAndCols = gridRows ++ gridCols
-		
-		val inputRowsAndColsAndReversed = inputRows ++ inputCols ++ inputRows.reverse ++ inputCols.reverse
-
-		val numIntersects = gridRowsAndCols.map(gridRow => {
-			inputRowsAndColsAndReversed.map(inputRow => {
-				if(inputRow.deep == gridRow.deep) {
-					//println("Intersect one " + gridRow.mkString(""))
-					//println("Intersect two " + inputRow.mkString(""))
-					1
-				} else {
-					0
-				}
-			}).sum 
+		val matchingRows = gridRows.map(gridRow => {
+			inputRows.map(inputRow => {
+				if(inputRow.deep == gridRow.deep) 1 else 0
+			}).sum
 		}).sum
-		//val intersectingRowsAndCols = gridRowsAndCols.intersect(inputRowsAndColsAndReversed)
 
-		println()
-		println("Num intersects " + numIntersects)
+		if(matchingRows == gridRows.length) {
+			println("Matched rows")
+			return true
+		}
 
-		true
+		val matchingCols = gridRows.map(gridRow => {
+			inputCols.map(inputCol => {
+				if(inputCol.deep == gridRow.deep) 1 else 0
+			}).sum
+		}).sum
+
+		if(matchingCols == gridRows.length) {
+			println("Matched cols")
+			return true
+		}
+
+		false
 	}
 
 }
