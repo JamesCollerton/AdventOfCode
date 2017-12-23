@@ -24,31 +24,30 @@ class ArtBook(val artBookString: String) {
 	def createAllMatchingGrids(inputGrid: Array[Array[String]]): ArrayBuffer[Array[Array[String]]] = {
 		val matchingGrids = ArrayBuffer(inputGrid)
 	
-		printInput()
-	
-		matchingGrids += symmetric(matchingGrids.last)
-		matchingGrids += flip(matchingGrids.last)
-		matchingGrids += symmetric(matchingGrids.last)
-		matchingGrids += flip(matchingGrids.last)
-		matchingGrids += symmetric(matchingGrids.last)
-		matchingGrids += flip(matchingGrids.last)
-		matchingGrids += symmetric(matchingGrids.last)
+		matchingGrids += symmetric(matchingGrids.last.clone)
+		matchingGrids += flip(matchingGrids.last.clone)
+		matchingGrids += symmetric(matchingGrids.last.clone)
+		matchingGrids += flip(matchingGrids.last.clone)
+		matchingGrids += symmetric(matchingGrids.last.clone)
+		matchingGrids += flip(matchingGrids.last.clone)
+		matchingGrids += symmetric(matchingGrids.last.clone)
+		matchingGrids += flip(matchingGrids.last.clone)
 	
 		matchingGrids.distinct
 	}
 
 	def symmetric(grid: Array[Array[String]]): Array[Array[String]] = {
-		val reverseY = grid.reverse
-		val reverseXY = grid.map(row => row.reverse)
-		println()
-		reverseXY.foreach(row => println(row.mkString("")))
-		reverseXY
+		val newGrid = Array.ofDim[String](grid.length, grid.length) 
+		for(i <- 0 to newGrid.length - 1) {
+			for(j <- 0 to newGrid.length - 1){
+				newGrid(i)(j) = grid(j)(i)
+			}
+		}
+		newGrid
 	}
 
 	def flip(grid: Array[Array[String]]): Array[Array[String]] = {
 		val reverseY = grid.reverse
-		println()
-		reverseY.foreach(row => println(row.mkString("")))
 		reverseY
 	}
 
@@ -64,39 +63,34 @@ class ArtBook(val artBookString: String) {
 		gridOutput.foreach(row => println(row.mkString("")))
 	}
 
+	def sumGrid(grid: Array[Array[String]]): Int = {
+		grid.map(row => row.map(field => if(field == "#") 1 else 0).sum).sum
+	}
+
 	def compareGrid(grid: ArrayBuffer[Array[String]]): Boolean = {
-		val gridRows = grid
-		val inputRows = gridInput
-		val inputCols = (0 to gridInput.length - 1).map(i => gridInput.map(row => row(i)).toArray)
+			
+		println()
+		println("Input Grid")
+		println()
+		grid.foreach(row => println(row.mkString("")))
+		val gridSum = sumGrid(grid.toArray)
 
-		// Either the columns of the input grid are the same as the rows or the rows are.
-		val matchingRows = gridRows.map(gridRow => {
-			inputRows.map(inputRow => {
-				if(inputRow.deep == gridRow.deep || inputRow.deep == gridRow.reverse.deep) 1 else 0
-			}).sum
-		}).sum
+		allMatchingGrids.foreach(matchingGrid => {
 
-		//println("Matched rows: " + matchingRows)
-		//println()
+			val matchSum = sumGrid(matchingGrid)
 
-		if(matchingRows == gridRows.length) {
-			println("Matched rows")
-			return true
-		}
+			if(matchSum == gridSum) {
+				println()
+				println("Matching Grid")
+				println()
+				matchingGrid.foreach(row => println(row.mkString("")))
+			}
 
-		val matchingCols = gridRows.map(gridRow => {
-			inputCols.map(inputCol => {
-				if(inputCol.deep == gridRow.deep || inputCol.deep == gridRow.reverse.deep) 1 else 0
-			}).sum
-		}).sum
-
-		//println("Matched cols: " + matchingCols)
-		//println()
-
-		if(matchingCols == gridRows.length) {
-			println("Matched cols")
-			return true
-		}
+			if(grid.toArray.deep == matchingGrid.toArray.deep) {
+				println("Found match")
+				return true
+			}
+		})
 
 		false
 	}
