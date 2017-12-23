@@ -7,7 +7,7 @@ object DayTwentyOne {
 
 	def main(args: Array[String]): Unit = {
 		def image = Utils.readIn("OriginalImage.txt")
-		def artBook = Utils.readIn("DayTwentyOneTestInput.txt")
+		def artBook = Utils.readIn("DayTwentyOneInput.txt")
 
 		val artBookGrids = makeArtBookGrids(artBook)
 
@@ -38,6 +38,7 @@ object DayTwentyOne {
 		println("Image Size: " + imageSize)
 		println("Image Divisor: " + imageDivisor)
 		println("Image Modder: " + imageModder)
+		println("Counter: " + counter)
 	
 		val grids = (0 to imageDivisor - 1).flatMap(i => {
 			

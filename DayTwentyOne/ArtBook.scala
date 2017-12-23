@@ -40,9 +40,12 @@ class ArtBook(val artBookString: String) {
 		// Either the columns of the input grid are the same as the rows or the rows are.
 		val matchingRows = gridRows.map(gridRow => {
 			inputRows.map(inputRow => {
-				if(inputRow.deep == gridRow.deep) 1 else 0
+				if(inputRow.deep == gridRow.deep || inputRow.deep == gridRow.reverse.deep) 1 else 0
 			}).sum
 		}).sum
+
+		//println("Matched rows: " + matchingRows)
+		//println()
 
 		if(matchingRows == gridRows.length) {
 			println("Matched rows")
@@ -51,9 +54,12 @@ class ArtBook(val artBookString: String) {
 
 		val matchingCols = gridRows.map(gridRow => {
 			inputCols.map(inputCol => {
-				if(inputCol.deep == gridRow.deep) 1 else 0
+				if(inputCol.deep == gridRow.deep || inputCol.deep == gridRow.reverse.deep) 1 else 0
 			}).sum
 		}).sum
+
+		//println("Matched cols: " + matchingCols)
+		//println()
 
 		if(matchingCols == gridRows.length) {
 			println("Matched cols")
