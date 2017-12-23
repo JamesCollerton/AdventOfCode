@@ -1,5 +1,7 @@
 package ArtBook
 
+import scala.collection.mutable.ArrayBuffer
+
 class ArtBook(val artBookString: String) {
 
 	// The grid we are matching
@@ -28,6 +30,18 @@ class ArtBook(val artBookString: String) {
 		println()
 		println("Output")
 		gridOutput.foreach(row => println(row.mkString("")))
+	}
+
+	def compareGrid(grid: ArrayBuffer[Array[String]]): Boolean = {
+		val gridRows = grid
+		println() 
+		gridRows.foreach(row => println(row.mkString("")))
+		println()
+		val gridCols = (0 to grid.length - 1).map(i => grid.map(row => row(i)))
+		gridCols.foreach(col => println(col.mkString("")))
+		//val outputRows = grid
+		//val outputCols = grid.map(
+		true
 	}
 
 }

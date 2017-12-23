@@ -29,25 +29,25 @@ object DayTwentyOne {
 		} else {
 			(imageSize / 3, 3)
 		}
-		
+	
 		val grids = (0 to imageDivisor - 1).flatMap(i => {
 			
 			// Blocks of n rows
 			val rows = image.slice(i * imageModder, (i + 1) * imageModder)
 			
-			println()	
-			println("Block " + i)
-
 				// Block of n grids for the n rows
 				val grids = (0 to imageDivisor - 1).map(j => {
 					rows.map(_.slice(j * imageModder, (j + 1) * imageModder))		
 				})
 
-			//grids.foreach(grid => grid.foreach(row => println(row.mkString(""))))
 			grids
 		})
 
-		grids.foreach(grid => grid.foreach(row => println(row.mkString(""))))
+		grids.foreach(grid => {
+			artBookGrids.foreach(artBookGrid => {
+				artBookGrid.compareGrid(grid)
+			})
+		})		
 
 	}
 
