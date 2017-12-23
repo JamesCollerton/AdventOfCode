@@ -68,26 +68,9 @@ class ArtBook(val artBookString: String) {
 	}
 
 	def compareGrid(grid: ArrayBuffer[Array[String]]): Boolean = {
-			
-//		println()
-//		println("Input Grid")
-//		println()
-//		grid.foreach(row => println(row.mkString("")))
-//		val gridSum = sumGrid(grid.toArray)
 
 		allMatchingGrids.foreach(matchingGrid => {
-
-//			val matchSum = sumGrid(matchingGrid)
-//
-//			if(matchSum == gridSum) {
-//				println()
-//				println("Matching Grid")
-//				println()
-//				matchingGrid.foreach(row => println(row.mkString("")))
-//			}
-
 			if(grid.toArray.deep == matchingGrid.toArray.deep) {
-//				println("Found match")
 				return true
 			}
 		})
