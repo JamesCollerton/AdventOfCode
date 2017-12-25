@@ -2,6 +2,7 @@ import Utils._
 import Direction._
 
 import scala.collection.mutable.ArrayBuffer
+import scala.collection.mutable.HashMap
 
 object DayTwentyTwo {
 
@@ -16,11 +17,11 @@ object DayTwentyTwo {
 		// Middle
 		val startingCoordinates = (grid(0).length / 2, grid.length /2)
 		// Start Moving
-		println("Number of infected " + solveOneStep(infectedCoordinates, startingCoordinates, 0, 10000000, Direction.North))
+		println("Number of infected " + solveOneStep(infectedCoordinates, startingCoordinates, 0, 1000000, Direction.North))
 	}
 
 	@annotation.tailrec
-	def solveOneStep(infectedCoordinates: ArrayBuffer[(Int, Int, String)], currentCoordinates: (Int, Int), infectionCounter: Int, counter: Int, direction: Direction.Value): Int = {
+	def solveOneStep(infectedCoordinates: HashMap[(Int, Int), String], currentCoordinates: (Int, Int), infectionCounter: Int, counter: Int, direction: Direction.Value): Int = {
 		if (counter == 0) return infectionCounter
 
 		if (counter % 10000 == 0) println(counter)
@@ -36,19 +37,20 @@ object DayTwentyTwo {
 //		println("Counter " + counter)
 //		println("Direction " + direction)
 
-		val currCoordinatesInfected = (currentCoordinates._1, currentCoordinates._2, "I")
-		val currCoordinatesFlagged = (currentCoordinates._1, currentCoordinates._2, "F")
-		val currCoordinatesWeakened = (currentCoordinates._1, currentCoordinates._2, "W")
+//		val currCoordinatesInfected = (currentCoordinates._1, currentCoordinates._2, "I")
+//		val currCoordinatesFlagged = (currentCoordinates._1, currentCoordinates._2, "F")
+//		val currCoordinatesWeakened = (currentCoordinates._1, currentCoordinates._2, "W")
 
-		val (newCoordinates, newInfectionCounter, newDirection) = if(infectedCoordinates.contains(currCoordinatesInfected)) {
+		val (newCoordinates, newInfectionCounter, newDirection) = if(infectedCoordinates.contains(currentCoordinates) && infectedCoordinates(currentCoordinates) == "I") {
 
 			// Square is infected 
 			// 	- Turn right
 			// 	- Flag it.
 
 			// Flag
-			infectedCoordinates -= currCoordinatesInfected
-			infectedCoordinates += currCoordinatesFlagged
+			infectedCoordinates(currentCoordinates) = "F" 
+			//infectedCoordinates -= currCoordinatesInfected
+			//infectedCoordinates += currCoordinatesFlagged
  
 			// Turn right
 			val results = direction match {
@@ -58,14 +60,15 @@ object DayTwentyTwo {
 				case Direction.West => 	((currentCoordinates._1, currentCoordinates._2 - 1), infectionCounter, Direction.North)  
 			}
 			results 
-		} else if(infectedCoordinates.contains(currCoordinatesFlagged)) {
+		} else if(infectedCoordinates.contains(currentCoordinates) && infectedCoordinates(currentCoordinates) == "F") {
 
 			// Square is flagged
 			// 	- Turn back
 			// 	- Clean it
 			
 			// Clean (Remove from list)
-			infectedCoordinates -= currCoordinatesFlagged
+			infectedCoordinates -= currentCoordinates
+			//infectedCoordinates -= currCoordinatesFlagged
 
 			// Turn Back
 			val results = direction match {
@@ -76,15 +79,16 @@ object DayTwentyTwo {
 			}
 			results 
 
-		} else if(infectedCoordinates.contains(currCoordinatesWeakened)) {
+		} else if(infectedCoordinates.contains(currentCoordinates) && infectedCoordinates(currentCoordinates) == "W") {
 
 			// Square is weakened
 			// 	- Go forward
 			// 	- Infect it
 			
 			// Infect
-			infectedCoordinates -= currCoordinatesWeakened
-			infectedCoordinates += currCoordinatesInfected 
+//			infectedCoordinates -= currCoordinatesWeakened
+//			infectedCoordinates += currCoordinatesInfected 
+			infectedCoordinates(currentCoordinates) = "I" 
 
 			// Go forward
 			val results = direction match {
@@ -101,7 +105,8 @@ object DayTwentyTwo {
 			// 	- Turn left
 			// 	- Weaken it
 			
-			infectedCoordinates += currCoordinatesWeakened
+			//infectedCoordinates += currCoordinatesWeakened
+			infectedCoordinates(currentCoordinates) = "W" 
 
 			// Turn left
 			val results = direction match {
@@ -120,14 +125,14 @@ object DayTwentyTwo {
 		solveOneStep(infectedCoordinates, newCoordinates, newInfectionCounter, counter - 1, newDirection)
 	} 
 
-	def findInfectedCoordinates(grid: ArrayBuffer[Array[String]]): ArrayBuffer[(Int, Int, String)] = {
-		val infectedCoords = grid.zipWithIndex.flatMap{ case (row, i) => {
-			row.zipWithIndex.flatMap{ case(field, j) => {
-				if (field == "#")  Some( (j, i, "I") )
-				else None
+	def findInfectedCoordinates(grid: ArrayBuffer[Array[String]]): HashMap[(Int, Int), String] = {
+		val infectedCoords = new HashMap[(Int, Int), String]
+		grid.zipWithIndex.foreach{ case (row, i) => {
+			row.zipWithIndex.foreach{ case(field, j) => {
+				if (field == "#")  infectedCoords((j, i)) = "I"
 			} } 
 		} }
-		infectedCoords.foreach(coord => println(coord))
+		infectedCoords.foreach{ case(k, v) => println("Key " + k + " Value " + v) }
 		infectedCoords
 	}
 
