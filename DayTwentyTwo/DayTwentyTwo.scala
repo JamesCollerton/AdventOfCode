@@ -24,23 +24,6 @@ object DayTwentyTwo {
 	def solveOneStep(infectedCoordinates: HashMap[(Int, Int), String], currentCoordinates: (Int, Int), infectionCounter: Int, counter: Int, direction: Direction.Value): Int = {
 		if (counter == 0) return infectionCounter
 
-		if (counter % 10000 == 0) println(counter)
-
-//		println()
-//		println("---------------------------------------------------------------")
-//		println()
-//
-//		println("Infected Coordinates")
-//		infectedCoordinates.foreach(coord => println(coord))
-//		println("Current Coordinates " + currentCoordinates)
-//		println("Infection counter " + infectionCounter)
-//		println("Counter " + counter)
-//		println("Direction " + direction)
-
-//		val currCoordinatesInfected = (currentCoordinates._1, currentCoordinates._2, "I")
-//		val currCoordinatesFlagged = (currentCoordinates._1, currentCoordinates._2, "F")
-//		val currCoordinatesWeakened = (currentCoordinates._1, currentCoordinates._2, "W")
-
 		val (newCoordinates, newInfectionCounter, newDirection) = if(infectedCoordinates.contains(currentCoordinates) && infectedCoordinates(currentCoordinates) == "I") {
 
 			// Square is infected 
@@ -49,8 +32,6 @@ object DayTwentyTwo {
 
 			// Flag
 			infectedCoordinates(currentCoordinates) = "F" 
-			//infectedCoordinates -= currCoordinatesInfected
-			//infectedCoordinates += currCoordinatesFlagged
  
 			// Turn right
 			val results = direction match {
@@ -68,7 +49,6 @@ object DayTwentyTwo {
 			
 			// Clean (Remove from list)
 			infectedCoordinates -= currentCoordinates
-			//infectedCoordinates -= currCoordinatesFlagged
 
 			// Turn Back
 			val results = direction match {
@@ -86,8 +66,6 @@ object DayTwentyTwo {
 			// 	- Infect it
 			
 			// Infect
-//			infectedCoordinates -= currCoordinatesWeakened
-//			infectedCoordinates += currCoordinatesInfected 
 			infectedCoordinates(currentCoordinates) = "I" 
 
 			// Go forward
@@ -104,8 +82,8 @@ object DayTwentyTwo {
 			// Square is clean
 			// 	- Turn left
 			// 	- Weaken it
-			
-			//infectedCoordinates += currCoordinatesWeakened
+		
+			// Weaken	
 			infectedCoordinates(currentCoordinates) = "W" 
 
 			// Turn left
@@ -118,10 +96,6 @@ object DayTwentyTwo {
 			results 
 		}
 
-//		println()
-//		println("---------------------------------------------------------------")
-//		println()
-
 		solveOneStep(infectedCoordinates, newCoordinates, newInfectionCounter, counter - 1, newDirection)
 	} 
 
@@ -132,7 +106,6 @@ object DayTwentyTwo {
 				if (field == "#")  infectedCoords((j, i)) = "I"
 			} } 
 		} }
-		infectedCoords.foreach{ case(k, v) => println("Key " + k + " Value " + v) }
 		infectedCoords
 	}
 
