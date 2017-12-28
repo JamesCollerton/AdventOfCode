@@ -27,7 +27,11 @@ object DayTwentyFour {
 		// Remove them from the arraybuffer
 		makeBranches(startingPiece, bridgePieces)
 
-		printTree(startingPiece, 0)		
+		// Print tree
+		// Check remaining bridge pieces
+		printTree(startingPiece, 0)
+		println()
+		bridgePieces.foreach(_.print())
 
 		// Repeat
 
@@ -78,8 +82,9 @@ object DayTwentyFour {
 
 			// Remove from array buffer and recurse up
 			val tempBridgePieces = bridgePieces.clone
-			tempBridgePieces -= bridgePiece
-			makeBranches(bridgePiece, tempBridgePieces)
+			//tempBridgePieces -= bridgePiece
+			bridgePieces -= bridgePiece
+			makeBranches(bridgePiece, bridgePieces)
 
 			// Remove permanently from array buffer
 			bridgePieces -= bridgePiece
