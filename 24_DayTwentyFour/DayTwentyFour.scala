@@ -27,12 +27,21 @@ object DayTwentyFour {
 		// Remove them from the arraybuffer
 		makeBranches(startingPiece, bridgePieces)
 
-		
+		printTree(startingPiece, 0)		
 
 		// Repeat
 
 		// Will return an array buffer of all of the starting nodes for the tree
 
+	}
+
+	def printTree(startingPiece: BridgePiece, counter: Int): Unit = {
+		println()
+		println("Level " + counter)
+		startingPiece.print()
+		startingPiece.getNextBridgePieces().foreach(bridgePiece => {
+			printTree(bridgePiece, counter + 1)
+		})
 	}
 
 	def makeBranches(currentPiece: BridgePiece, bridgePieces: ArrayBuffer[BridgePiece]): Unit = {

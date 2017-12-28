@@ -28,7 +28,11 @@ class BridgePiece(val endValues: Array[Int]) {
 	}
 
 	def addNextBridgePiece(nextBridgePiece: BridgePiece): Unit = {
-		nextBridgePieces += nextBridgePiece
+		if(!nextBridgePieces.contains(nextBridgePiece))	nextBridgePieces += nextBridgePiece
+	}
+
+	def getNextBridgePieces(): ArrayBuffer[BridgePiece] = {
+		nextBridgePieces
 	}
 
 	def print(): Unit = {
