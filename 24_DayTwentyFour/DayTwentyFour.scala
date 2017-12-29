@@ -7,7 +7,6 @@ object DayTwentyFour {
 
 	def main(args: Array[String]): Unit = {
 		val input = Utils.readIn("DayTwentyFourInput.txt")
-		input.foreach(_.print())
 		solveOne(input)
 	}	
 
@@ -19,36 +18,21 @@ object DayTwentyFour {
 			val tempBridgePieces = bridgePieces.clone
 			tempBridgePieces -= piece
 
-			//println()
-			//println("-------------------------------------")
-			//println()
-			//println("Chain")
-
 			piece.setTopValue(0)
 			piece.setBottomValueFromTopValue()
-			solveOneStep(piece, tempBridgePieces, piece.strength)
-
-			//piece.setTopValue(endValues(1))
-			//piece.setBottomValueFromTopValue()
-			//solveOneStep(piece, tempBridgePieces, piece.strength)
+			solveOneStep(piece, tempBridgePieces, piece.strength, 1)
 		})
 
-		strengths.foreach(x => println(x))
-		println("Strength " + strengths.max)
+		println("Strength " + strengths.maxBy(_._2))
 	}
 
-	def solveOneStep(currentPiece: BridgePiece, bridgePieces: ArrayBuffer[BridgePiece], strength: Int): ArrayBuffer[Int] = {
-	
-		//println()
-		//println("Value")
-		//currentPiece.print()		
+	def solveOneStep(currentPiece: BridgePiece, bridgePieces: ArrayBuffer[BridgePiece], strength: Int, length: Int): ArrayBuffer[(Int, Int)] = {
 
 		val bottomValue = currentPiece.getBottomValue()	
 		val matchingBridgePieces = bridgePieces.filter(piece => piece.endValues.contains(bottomValue))
 		
 		if (matchingBridgePieces.length == 0) {
-			println(strength)
-			return ArrayBuffer(strength) 
+			return ArrayBuffer((strength, length)) 
 		}
 
 		matchingBridgePieces.flatMap(piece => {		
@@ -57,11 +41,8 @@ object DayTwentyFour {
 
 			piece.setTopValue(bottomValue)
 			piece.setBottomValueFromTopValue()
-			solveOneStep(piece, tempBridgePieces, strength + piece.strength)
+			solveOneStep(piece, tempBridgePieces, strength + piece.strength, length + 1)
 		})
 	}
 
-	def findMaxWeight(startingPieces: ArrayBuffer[BridgePiece]): Unit = {
-
-	}
 }
