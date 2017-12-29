@@ -12,19 +12,22 @@ object DayTwentyFour {
 	}	
 
 	def solveOne(bridgePieces: ArrayBuffer[BridgePiece]): Unit = {
-		val startingPieces = new ArrayBuffer[BridgePiece]
-		makeTree(bridgePieces, startingPieces)
+		val startingPieces = makeTree(bridgePieces)
+		startingPieces.foreach(piece => {
+			printTree(piece, 0)
+			println()
+		})
 	}
 
-	def makeTree(bridgePieces: ArrayBuffer[BridgePiece], startingPieces: ArrayBuffer[BridgePiece]): Unit = {
+	def makeTree(bridgePieces: ArrayBuffer[BridgePiece]): ArrayBuffer[BridgePiece] = {
+		// Break condition
+		if(bridgePieces.length <= 0) return new ArrayBuffer[BridgePiece]
+
 		// Search for a bridge piece with the lowest end value
 		val startingPiece = findStartingPiece(bridgePieces)
 
 		// Remove from array buffer
 		bridgePieces -= startingPiece
-
-		// Add to starting pieces list
-		startingPieces += startingPiece
 
 		// Make the tree from that start point
 		makeBranches(startingPiece, bridgePieces)
@@ -36,9 +39,7 @@ object DayTwentyFour {
 		//bridgePieces.foreach(_.print())
 
 		// Repeat
-		if(bridgePieces.length > 0) makeTree(bridgePieces, startingPieces)
-
-		// Will return an array buffer of all of the starting nodes for the tree
+		makeTree(bridgePieces) :+ startingPiece
 		
 	}
 
