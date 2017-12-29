@@ -6,7 +6,7 @@ import scala.collection.mutable.ArrayBuffer
 object DayTwentyFour {
 
 	def main(args: Array[String]): Unit = {
-		val input = Utils.readIn("DayTwentyFourTestInput.txt")
+		val input = Utils.readIn("DayTwentyFourInput.txt")
 		input.foreach(_.print())
 		solveOne(input)
 	}	
@@ -16,6 +16,22 @@ object DayTwentyFour {
 		startingPieces.foreach(piece => {
 			printTree(piece, 0)
 			println()
+		})
+		findMaxWeight(startingPieces)
+	}
+
+	def findMaxWeight(startingPieces: ArrayBuffer[BridgePiece]): Unit = {
+		val maxStrength = startingPieces.flatMap(piece => stepUpTree(piece, piece.strength)).max
+		println("Max Strength " + maxStrength)
+	}
+
+	def stepUpTree(currentPiece: BridgePiece, runningSum: Int): ArrayBuffer[Int] = {
+		if(currentPiece.getNextBridgePieces().length == 0) {
+			return ArrayBuffer(runningSum)
+		}
+
+		currentPiece.getNextBridgePieces().flatMap(piece => {
+			stepUpTree(piece, runningSum + piece.strength)
 		})
 	}
 
@@ -30,17 +46,12 @@ object DayTwentyFour {
 		bridgePieces -= startingPiece
 
 		// Make the tree from that start point
-		makeBranches(startingPiece, bridgePieces)
-
-		// Print tree
-		// Check remaining bridge pieces
-		//printTree(startingPiece, 0)
-		//println()
-		//bridgePieces.foreach(_.print())
+		val startingPieceClone = startingPiece.copy()
+		val bridgePiecesClone = bridgePieces.map(piece => piece.copy())
+		makeBranches(startingPieceClone, bridgePiecesClone)
 
 		// Repeat
-		makeTree(bridgePieces) :+ startingPiece
-		
+		makeTree(bridgePiecesClone) :+ startingPieceClone
 	}
 
 	def printTree(startingPiece: BridgePiece, counter: Int): Unit = {
@@ -85,13 +96,8 @@ object DayTwentyFour {
 			currentPiece.addNextBridgePiece(bridgePiece)
 
 			// Remove from array buffer and recurse up
-			val tempBridgePieces = bridgePieces.clone
-			//tempBridgePieces -= bridgePiece
 			bridgePieces -= bridgePiece
 			makeBranches(bridgePiece, bridgePieces)
-
-			// Remove permanently from array buffer
-			bridgePieces -= bridgePiece
 		})
 
 		println()
@@ -114,7 +120,7 @@ object DayTwentyFour {
 		allVals.foreach(v => println(v))
 
 		// Find minimum end value
-		val minVal = allVals.min._2
+		val minVal = allVals.minBy(x => x._2)._1
 		val minPiece = bridgePieces(minVal)
 
 		println("Found minimum")
