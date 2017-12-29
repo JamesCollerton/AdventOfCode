@@ -12,131 +12,56 @@ object DayTwentyFour {
 	}	
 
 	def solveOne(bridgePieces: ArrayBuffer[BridgePiece]): Unit = {
-		val startingPieces = makeTree(bridgePieces)
-		startingPieces.foreach(piece => {
-			printTree(piece, 0)
-			println()
+		val startingPieces = bridgePieces.filter(piece => piece.endValues.contains(0))
+
+		val strengths = startingPieces.flatMap(piece => {
+			// Create a version without current bridge piece in
+			val tempBridgePieces = bridgePieces.clone
+			tempBridgePieces -= piece
+
+			//println()
+			//println("-------------------------------------")
+			//println()
+			//println("Chain")
+
+			piece.setTopValue(0)
+			piece.setBottomValueFromTopValue()
+			solveOneStep(piece, tempBridgePieces, piece.strength)
+
+			//piece.setTopValue(endValues(1))
+			//piece.setBottomValueFromTopValue()
+			//solveOneStep(piece, tempBridgePieces, piece.strength)
 		})
-		findMaxWeight(startingPieces)
+
+		strengths.foreach(x => println(x))
+		println("Strength " + strengths.max)
+	}
+
+	def solveOneStep(currentPiece: BridgePiece, bridgePieces: ArrayBuffer[BridgePiece], strength: Int): ArrayBuffer[Int] = {
+	
+		//println()
+		//println("Value")
+		//currentPiece.print()		
+
+		val bottomValue = currentPiece.getBottomValue()	
+		val matchingBridgePieces = bridgePieces.filter(piece => piece.endValues.contains(bottomValue))
+		
+		if (matchingBridgePieces.length == 0) {
+			println(strength)
+			return ArrayBuffer(strength) 
+		}
+
+		matchingBridgePieces.flatMap(piece => {		
+			val tempBridgePieces = bridgePieces.clone
+			tempBridgePieces -= piece
+
+			piece.setTopValue(bottomValue)
+			piece.setBottomValueFromTopValue()
+			solveOneStep(piece, tempBridgePieces, strength + piece.strength)
+		})
 	}
 
 	def findMaxWeight(startingPieces: ArrayBuffer[BridgePiece]): Unit = {
-		val maxStrength = startingPieces.flatMap(piece => stepUpTree(piece, piece.strength)).max
-		println("Max Strength " + maxStrength)
-	}
-
-	def stepUpTree(currentPiece: BridgePiece, runningSum: Int): ArrayBuffer[Int] = {
-		if(currentPiece.getNextBridgePieces().length == 0) {
-			return ArrayBuffer(runningSum)
-		}
-
-		currentPiece.getNextBridgePieces().flatMap(piece => {
-			stepUpTree(piece, runningSum + piece.strength)
-		})
-	}
-
-	def makeTree(bridgePieces: ArrayBuffer[BridgePiece]): ArrayBuffer[BridgePiece] = {
-		// Break condition
-		if(bridgePieces.length <= 0) return new ArrayBuffer[BridgePiece]
-
-		// Search for a bridge piece with the lowest end value
-		val startingPiece = findStartingPiece(bridgePieces)
-
-		// Remove from array buffer
-		bridgePieces -= startingPiece
-
-		// Make the tree from that start point
-		val startingPieceClone = startingPiece.copy()
-		val bridgePiecesClone = bridgePieces.map(piece => piece.copy())
-		makeBranches(startingPieceClone, bridgePiecesClone)
-
-		// Repeat
-		makeTree(bridgePiecesClone) :+ startingPieceClone
-	}
-
-	def printTree(startingPiece: BridgePiece, counter: Int): Unit = {
-		println()
-		println("Level " + counter)
-		startingPiece.print()
-		startingPiece.getNextBridgePieces().foreach(bridgePiece => {
-			printTree(bridgePiece, counter + 1)
-		})
-	}
-
-	def makeBranches(currentPiece: BridgePiece, bridgePieces: ArrayBuffer[BridgePiece]): Unit = {
-		
-		println()
-		println("--------------------------------------------")
-		println()
-		println("Finding All Branches for Current Piece")	
-		currentPiece.print()
-		
-		// All indexes for each end value
-		val allEndValues = bridgePieces.zipWithIndex.flatMap{ case (bp, idx) => bp.endValues.map(ev => (idx, ev)) }
-		
-		// Indexes of each of the next pieces matching the bottom value
-		val nextPiecesIndexes = allEndValues.filter(x => x._2 == currentPiece.getBottomValue()).map(_._1).distinct
-
-		// All of the next pieces by index
-		val nextPieces = nextPiecesIndexes.collect(bridgePieces)		
-		
-		println("Next piece indexes")
-		nextPiecesIndexes.foreach(x => println(x))
-		println("Next pieces")
-		nextPieces.foreach(_.print())
-
-		nextPieces.foreach(bridgePiece => {
-			// Set top values	
-			bridgePiece.setTopValue(currentPiece.getBottomValue())
-
-			// Set bottom values
-			bridgePiece.setBottomValueFromTopValue()
-
-			// Make next branch
-			currentPiece.addNextBridgePiece(bridgePiece)
-
-			// Remove from array buffer and recurse up
-			bridgePieces -= bridgePiece
-			makeBranches(bridgePiece, bridgePieces)
-		})
-
-		println()
-		println("--------------------------------------------")
-		println()
 
 	}
-
-	def findStartingPiece(bridgePieces: ArrayBuffer[BridgePiece]): BridgePiece = {
-	
-		println()
-		println("--------------------------------------------")
-		println()
-		println("Finding Start Piece")	
-
-		// Gets all end values and indexes
-		val allVals = bridgePieces.zipWithIndex.flatMap{ case (bp, idx) => bp.endValues.map(ev => (idx, ev)) }
-
-		println("Found all end values and indexes")
-		allVals.foreach(v => println(v))
-
-		// Find minimum end value
-		val minVal = allVals.minBy(x => x._2)._1
-		val minPiece = bridgePieces(minVal)
-
-		println("Found minimum")
-		println(minVal)
-		minPiece.print()
-
-		minPiece.setTopValue(minPiece.endValues.min)
-		minPiece.setBottomValueFromTopValue()
-
-		minPiece.print()
-
-		println()
-		println("--------------------------------------------")
-		println()
-
-		minPiece
-	}
-
 }
