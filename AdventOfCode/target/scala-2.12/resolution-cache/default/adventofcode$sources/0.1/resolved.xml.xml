@@ -4,7 +4,7 @@
 		module="adventofcode$sources"
 		revision="0.1"
 		status="integration"
-		publication="20180409142633"
+		publication="20180409225847"
 	/>
 	<configurations>
 		<conf name="compile" visibility="public" description=""/>
