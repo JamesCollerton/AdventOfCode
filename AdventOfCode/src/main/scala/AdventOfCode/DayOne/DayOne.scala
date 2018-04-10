@@ -6,10 +6,9 @@ object DayOne {
 
   def main(args: Array[String]): Unit = {
 
-    val input = Utils.readFileAsList("/DayOne.txt")
+    val input = Utils.readFileAsString("/AdventOfCode/DayOne/DayOne.txt")
 
-    val partOneAns = partOne(input(0))
-    val partTwoAns = partTwo(input(0))
+    val (partOneAns, partTwoAns) = (partOne(input), partTwo(input))
 
     println(s"Part one: $partOneAns")
     println(s"Part two: $partTwoAns")
