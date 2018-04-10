@@ -1,1 +1,2 @@
 *.class
+AdventOfCode/project/target/config-classes/*.cache
