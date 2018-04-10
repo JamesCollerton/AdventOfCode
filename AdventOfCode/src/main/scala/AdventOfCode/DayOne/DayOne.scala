@@ -16,11 +16,15 @@ object DayOne {
   }
 
   def partOne(input: String): Int = {
-    1
+    scanRoundString(input, 1)
   }
 
   def partTwo(input: String): Int = {
-    0
+    scanRoundString(input, input.length / 2)
+  }
+
+  def scanRoundString(input: String, offset: Int): Int = {
+    input.zipWithIndex.collect{ case (c, i) if c == input((i + offset) % input.length) => c.asDigit }.sum
   }
 
 }
