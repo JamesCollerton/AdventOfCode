@@ -1,12 +1,12 @@
 package AdventOfCode.DayOne
 
-import AdventOfCode.Utils
+import AdventOfCode.Utils.ReadFileUtils
 
 object DayOne {
 
   def main(args: Array[String]): Unit = {
 
-    val input = Utils.readFileAsString("/AdventOfCode/DayOne/DayOne.txt")
+    val input = ReadFileUtils.readFileAsString("/AdventOfCode/DayOne/DayOne.txt")
 
     val (partOneAns, partTwoAns) = (partOne(input), partTwo(input))
 
