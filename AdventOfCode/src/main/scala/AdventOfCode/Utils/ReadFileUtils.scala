@@ -10,6 +10,10 @@ object ReadFileUtils {
     readFileAsStringList(filename).mkString("")
   }
 
+  def readFileAsInt(filename: String): Int = {
+    readFileAsString(filename).toInt
+  }
+
   def readFileAsIntList(filename: String): List[List[Int]] = {
     readFileAsStringList(filename).map(s => s.split("\\s+").map(s => s.toInt).toList)
   }

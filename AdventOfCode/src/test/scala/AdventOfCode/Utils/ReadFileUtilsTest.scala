@@ -16,4 +16,8 @@ class ReadFileUtilsTest extends FunSuite {
     assert(ReadFileUtils.readFileAsIntList("/AdventOfCode/Utils/ReadFileAsIntList.txt") == List(List(1,2,3,4), List(5,6,7), List(8,9,10)))
   }
 
+  test("Read file as int") {
+    assert(ReadFileUtils.readFileAsInt("/AdventOfCode/Utils/ReadFileAsInt.txt") == 1453)
+  }
+
 }

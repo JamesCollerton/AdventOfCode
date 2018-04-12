@@ -1,6 +1,5 @@
 package AdventOfCode.DayTwo
 
-import AdventOfCode.DayOne.DayOne
 import AdventOfCode.Utils.ReadFileUtils
 import org.scalatest.FunSuite
 
