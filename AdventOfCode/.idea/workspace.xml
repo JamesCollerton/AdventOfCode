@@ -36,11 +36,32 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="DayTwo.scala" pinned="false" current-in-tab="false">
+      <file leaf-file-name="DayTwo.scala" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/scala/AdventOfCode/DayTwo/DayTwo.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="41" lean-forward="true" selection-start-line="4" selection-start-column="41" selection-end-line="4" selection-end-column="41" />
+            <state relative-caret-position="307">
+              <caret line="25" column="9" selection-start-line="25" selection-start-column="9" selection-end-line="25" selection-end-column="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DayTwoTest.scala" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/scala/AdventOfCode/DayTwo/DayTwoTest.scala">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="9" column="83" selection-start-line="9" selection-start-column="83" selection-end-line="9" selection-end-column="83" />
+              <folding>
+                <element signature="e#29#62#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DayTwoPartTwoTest.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/resources/AdventOfCode/DayTwo/DayTwoPartTwoTest.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="30">
+              <caret line="2" column="7" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
             </state>
           </provider>
         </entry>
@@ -69,8 +90,8 @@
       <file leaf-file-name="DayOneTest.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/scala/AdventOfCode/DayOne/DayOneTest.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="35" lean-forward="true" selection-start-line="4" selection-start-column="35" selection-end-line="4" selection-end-column="35" />
+            <state relative-caret-position="90">
+              <caret line="6" selection-start-line="6" selection-end-line="8" selection-end-column="3" />
             </state>
           </provider>
         </entry>
@@ -84,7 +105,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ReadFileAsIntList.txt" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ReadFileAsIntList.txt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/resources/AdventOfCode/Utils/ReadFileAsIntList.txt">
           <provider selected="true" editor-type-id="text-editor">
             <state>
@@ -124,9 +145,7 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/test/resources/AdventOfCode/DayTwo/DayTwoPartOneTest.txt" />
-        <option value="$PROJECT_DIR$/src/test/resources/AdventOfCode/DayTwo/DayTwoPartTwoTest.txt" />
         <option value="$PROJECT_DIR$/src/main/resources/AdventOfCode/DayTwo/DayTwo.txt" />
-        <option value="$PROJECT_DIR$/src/main/scala/AdventOfCode/DayTwo/DayTwo.scala" />
         <option value="$PROJECT_DIR$/src/test/resources/AdventOfCode/Utils/ReadFileAsString.txt" />
         <option value="$PROJECT_DIR$/src/main/scala/AdventOfCode/Utils/package.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/AdventOfCode/DayOne/DayOne.scala" />
@@ -135,6 +154,9 @@
         <option value="$PROJECT_DIR$/src/test/scala/AdventOfCode/Utils/ReadFileUtilsTest.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/AdventOfCode/Utils/ReadFileUtils.scala" />
         <option value="$PROJECT_DIR$/src/test/resources/AdventOfCode/Utils/ReadFileAsIntList.txt" />
+        <option value="$PROJECT_DIR$/src/test/scala/AdventOfCode/DayTwo/DayTwoTest.scala" />
+        <option value="$PROJECT_DIR$/src/test/resources/AdventOfCode/DayTwo/DayTwoPartTwoTest.txt" />
+        <option value="$PROJECT_DIR$/src/main/scala/AdventOfCode/DayTwo/DayTwo.scala" />
       </list>
     </option>
   </component>
@@ -184,6 +206,15 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
               <item name="AdventOfCode" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="AdventOfCode" type="b2602c69:ProjectViewProjectNode" />
+              <item name="AdventOfCode" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="AdventOfCode" type="462c0819:PsiDirectoryNode" />
+              <item name="DayTwo" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="AdventOfCode" type="b2602c69:ProjectViewProjectNode" />
@@ -329,6 +360,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.RecentsKey">
+      <recent name="AdventOfCode.DayTwo" />
       <recent name="AdventOfCode.Utils" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
@@ -350,7 +382,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="ScalaTest.ReadFileUtilsTest">
+  <component name="RunManager" selected="Application.DayTwo">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
     </configuration>
@@ -395,9 +427,9 @@
       </option>
       <patterns />
     </configuration>
-    <configuration name="DayOneTest" type="ScalaTestRunConfiguration" factoryName="ScalaTest" temporary="true">
+    <configuration name="DayTwoTest" type="ScalaTestRunConfiguration" factoryName="ScalaTest" temporary="true">
       <module name="adventofcode" />
-      <setting name="path" value="AdventOfCode.DayOne.DayOneTest" />
+      <setting name="path" value="AdventOfCode.DayTwo.DayTwoTest" />
       <setting name="vmparams" value="" />
       <setting name="params" value="" />
       <setting name="workingDirectory" value="file://$PROJECT_DIR$" />
@@ -407,7 +439,7 @@
       <setting name="useUiWithSbt" value="false" />
       <envs />
       <setting name="testKind" value="Class" />
-      <setting name="path" value="AdventOfCode.DayOne.DayOneTest" />
+      <setting name="path" value="AdventOfCode.DayTwo.DayTwoTest" />
     </configuration>
     <configuration name="ReadFileUtilsTest" type="ScalaTestRunConfiguration" factoryName="ScalaTest" temporary="true">
       <module name="adventofcode" />
@@ -475,18 +507,18 @@
     </configuration>
     <list>
       <item itemvalue="Application.DayOne" />
-      <item itemvalue="ScalaTest.DayOneTest" />
       <item itemvalue="Application.DayTwo" />
       <item itemvalue="ScalaTest.UtilsTest.Read file as string" />
       <item itemvalue="ScalaTest.ReadFileUtilsTest" />
+      <item itemvalue="ScalaTest.DayTwoTest" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.DayTwo" />
+        <item itemvalue="ScalaTest.DayTwoTest" />
         <item itemvalue="ScalaTest.ReadFileUtilsTest" />
         <item itemvalue="ScalaTest.UtilsTest.Read file as string" />
-        <item itemvalue="Application.DayTwo" />
         <item itemvalue="Application.DayOne" />
-        <item itemvalue="ScalaTest.DayOneTest" />
       </list>
     </recent_temporary>
   </component>
@@ -562,35 +594,35 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="DayOneTest - 2018.04.10 at 13h 17m 38s.xml">
-      <configuration name="DayOneTest" configurationId="ScalaTestRunConfiguration" />
-    </history-entry>
-    <history-entry file="DayOneTest - 2018.04.11 at 07h 33m 09s.xml">
-      <configuration name="DayOneTest" configurationId="ScalaTestRunConfiguration" />
-    </history-entry>
-    <history-entry file="UtilsTest_Read_file_as_string - 2018.04.11 at 07h 44m 09s.xml">
-      <configuration name="UtilsTest.Read file as string" configurationId="ScalaTestRunConfiguration" />
-    </history-entry>
-    <history-entry file="ReadFileUtilsTest - 2018.04.11 at 07h 46m 20s.xml">
-      <configuration name="ReadFileUtilsTest" configurationId="ScalaTestRunConfiguration" />
-    </history-entry>
-    <history-entry file="ReadFileUtilsTest - 2018.04.11 at 07h 47m 37s.xml">
-      <configuration name="ReadFileUtilsTest" configurationId="ScalaTestRunConfiguration" />
-    </history-entry>
-    <history-entry file="ReadFileUtilsTest - 2018.04.11 at 07h 49m 16s.xml">
-      <configuration name="ReadFileUtilsTest" configurationId="ScalaTestRunConfiguration" />
-    </history-entry>
-    <history-entry file="ReadFileUtilsTest - 2018.04.11 at 07h 49m 30s.xml">
-      <configuration name="ReadFileUtilsTest" configurationId="ScalaTestRunConfiguration" />
-    </history-entry>
-    <history-entry file="ReadFileUtilsTest - 2018.04.11 at 07h 51m 15s.xml">
-      <configuration name="ReadFileUtilsTest" configurationId="ScalaTestRunConfiguration" />
-    </history-entry>
     <history-entry file="ReadFileUtilsTest - 2018.04.11 at 07h 53m 02s.xml">
       <configuration name="ReadFileUtilsTest" configurationId="ScalaTestRunConfiguration" />
     </history-entry>
     <history-entry file="ReadFileUtilsTest - 2018.04.11 at 07h 55m 36s.xml">
       <configuration name="ReadFileUtilsTest" configurationId="ScalaTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="ReadFileUtilsTest - 2018.04.11 at 07h 55m 53s.xml">
+      <configuration name="ReadFileUtilsTest" configurationId="ScalaTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="DayTwoTest - 2018.04.12 at 08h 07m 44s.xml">
+      <configuration name="DayTwoTest" configurationId="ScalaTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="DayTwoTest - 2018.04.12 at 08h 08m 10s.xml">
+      <configuration name="DayTwoTest" configurationId="ScalaTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="DayTwoTest - 2018.04.12 at 08h 08m 28s.xml">
+      <configuration name="DayTwoTest" configurationId="ScalaTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="DayTwoTest - 2018.04.12 at 08h 13m 09s.xml">
+      <configuration name="DayTwoTest" configurationId="ScalaTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="DayTwoTest - 2018.04.12 at 08h 19m 22s.xml">
+      <configuration name="DayTwoTest" configurationId="ScalaTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="DayTwoTest - 2018.04.12 at 08h 20m 40s.xml">
+      <configuration name="DayTwoTest" configurationId="ScalaTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="DayTwoTest - 2018.04.12 at 08h 21m 05s.xml">
+      <configuration name="DayTwoTest" configurationId="ScalaTestRunConfiguration" />
     </history-entry>
   </component>
   <component name="ToolWindowManager">
@@ -662,13 +694,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/resources/AdventOfCode/DayTwo/DayTwoPartTwoTest.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="2" column="7" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/resources/AdventOfCode/DayTwo/DayTwoPartOneTest.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="36">
@@ -690,13 +715,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/AdventOfCode/DayTwo/DayTwo.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="41" lean-forward="true" selection-start-line="4" selection-start-column="41" selection-end-line="4" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/AdventOfCode/DayOne/DayOne.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
@@ -708,20 +726,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
           <caret line="2" column="3" selection-start-line="2" selection-end-line="2" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/scala/AdventOfCode/DayOne/DayOneTest.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="35" lean-forward="true" selection-start-line="4" selection-start-column="35" selection-end-line="4" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/scala/AdventOfCode/Utils/ReadFileUtilsTest.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
         </state>
       </provider>
     </entry>
@@ -739,6 +743,44 @@
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret column="12" selection-start-column="12" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/scala/AdventOfCode/Utils/ReadFileUtilsTest.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/scala/AdventOfCode/DayOne/DayOneTest.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" selection-start-line="6" selection-end-line="8" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/resources/AdventOfCode/DayTwo/DayTwoPartTwoTest.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="7" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/scala/AdventOfCode/DayTwo/DayTwoTest.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="83" selection-start-line="9" selection-start-column="83" selection-end-line="9" selection-end-column="83" />
+          <folding>
+            <element signature="e#29#62#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/AdventOfCode/DayTwo/DayTwo.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="307">
+          <caret line="25" column="9" selection-start-line="25" selection-start-column="9" selection-end-line="25" selection-end-column="9" />
         </state>
       </provider>
     </entry>
