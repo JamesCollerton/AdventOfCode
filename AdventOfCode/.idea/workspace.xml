@@ -36,15 +36,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="DayTwo.scala" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/scala/AdventOfCode/DayTwo/DayTwo.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="25" column="9" selection-start-line="25" selection-start-column="9" selection-end-line="25" selection-end-column="9" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="DayTwoTest.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/scala/AdventOfCode/DayTwo/DayTwoTest.scala">
           <provider selected="true" editor-type-id="text-editor">
@@ -57,59 +48,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DayTwoPartTwoTest.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/resources/AdventOfCode/DayTwo/DayTwoPartTwoTest.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="7" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ReadFileUtils.scala" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/scala/AdventOfCode/Utils/ReadFileUtils.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="182">
-              <caret line="14" column="3" lean-forward="true" selection-start-line="14" selection-start-column="3" selection-end-line="14" selection-end-column="3" />
-              <folding>
-                <element signature="e#22#48#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ReadFileAsInt.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/resources/AdventOfCode/Utils/ReadFileAsInt.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="4" selection-start-column="4" selection-end-column="4" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DayOneTest.scala" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/scala/AdventOfCode/DayOne/DayOneTest.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" selection-start-line="6" selection-end-line="8" selection-end-column="3" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DayThree.scala" pinned="false" current-in-tab="false">
+      <file leaf-file-name="DayThree.scala" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/scala/AdventOfCode/DayThree/DayThree.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="527">
-              <caret line="51" column="32" selection-start-line="51" selection-start-column="32" selection-end-line="51" selection-end-column="32" />
+            <state relative-caret-position="75">
+              <caret line="5" column="28" selection-start-line="5" selection-start-column="28" selection-end-line="5" selection-end-column="28" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DayThreeTest.scala" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DayThreeTest.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/scala/AdventOfCode/DayThree/DayThreeTest.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="79">
-              <caret line="7" selection-start-line="7" selection-end-line="21" selection-end-column="3" />
+            <state relative-caret-position="742">
+              <caret line="52" column="58" selection-start-line="52" selection-start-column="58" selection-end-line="52" selection-end-column="58" />
               <folding>
                 <element signature="e#31#70#0" expanded="true" />
               </folding>
@@ -152,8 +104,8 @@
         <option value="$PROJECT_DIR$/src/main/scala/AdventOfCode/Utils/ReadFileUtils.scala" />
         <option value="$PROJECT_DIR$/src/test/resources/AdventOfCode/Utils/ReadFileAsInt.txt" />
         <option value="$PROJECT_DIR$/src/test/scala/AdventOfCode/Utils/ReadFileUtilsTest.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/AdventOfCode/DayThree/DayThree.scala" />
         <option value="$PROJECT_DIR$/src/test/scala/AdventOfCode/DayThree/DayThreeTest.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/AdventOfCode/DayThree/DayThree.scala" />
       </list>
     </option>
   </component>
@@ -389,9 +341,20 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="ScalaTest.DayThreeTest">
+  <component name="RunManager" selected="Application.DayThree">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+    </configuration>
+    <configuration name="DayThree" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="AdventOfCode.DayThree.DayThree" />
+      <module name="adventofcode" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="AdventOfCode.DayThree.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
     </configuration>
     <configuration name="DayTwo" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="AdventOfCode.DayTwo.DayTwo" />
@@ -452,20 +415,6 @@
       <setting name="path" value="AdventOfCode.DayThree.DayThreeTest" />
       <setting name="testName" value="Day Three getCoordinates 25 is (4, 0)" />
     </configuration>
-    <configuration name="DayTwoTest" type="ScalaTestRunConfiguration" factoryName="ScalaTest" temporary="true">
-      <module name="adventofcode" />
-      <setting name="path" value="AdventOfCode.DayTwo.DayTwoTest" />
-      <setting name="vmparams" value="" />
-      <setting name="params" value="" />
-      <setting name="workingDirectory" value="file://$PROJECT_DIR$" />
-      <setting name="searchForTest" value="Across module dependencies" />
-      <setting name="showProgressMessages" value="true" />
-      <setting name="useSbt" value="false" />
-      <setting name="useUiWithSbt" value="false" />
-      <envs />
-      <setting name="testKind" value="Class" />
-      <setting name="path" value="AdventOfCode.DayTwo.DayTwoTest" />
-    </configuration>
     <configuration name="ReadFileUtilsTest" type="ScalaTestRunConfiguration" factoryName="ScalaTest" temporary="true">
       <module name="adventofcode" />
       <setting name="path" value="AdventOfCode.Utils.ReadFileUtilsTest" />
@@ -518,17 +467,17 @@
     <list>
       <item itemvalue="Application.DayTwo" />
       <item itemvalue="ScalaTest.ReadFileUtilsTest" />
-      <item itemvalue="ScalaTest.DayTwoTest" />
       <item itemvalue="ScalaTest.DayThreeTest" />
       <item itemvalue="ScalaTest.DayThreeTest.Day Three getCoordinates 25 is (4, 0)" />
+      <item itemvalue="Application.DayThree" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.DayThree" />
         <item itemvalue="ScalaTest.DayThreeTest" />
         <item itemvalue="ScalaTest.DayThreeTest.Day Three getCoordinates 25 is (4, 0)" />
         <item itemvalue="ScalaTest.ReadFileUtilsTest" />
         <item itemvalue="Application.DayTwo" />
-        <item itemvalue="ScalaTest.DayTwoTest" />
       </list>
     </recent_temporary>
   </component>
@@ -604,18 +553,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="DayThreeTest - 2018.04.13 at 08h 02m 05s.xml">
-      <configuration name="DayThreeTest" configurationId="ScalaTestRunConfiguration" />
-    </history-entry>
-    <history-entry file="DayThreeTest - 2018.04.13 at 08h 13m 09s.xml">
-      <configuration name="DayThreeTest" configurationId="ScalaTestRunConfiguration" />
-    </history-entry>
-    <history-entry file="DayThreeTest - 2018.04.13 at 08h 14m 18s.xml">
-      <configuration name="DayThreeTest" configurationId="ScalaTestRunConfiguration" />
-    </history-entry>
-    <history-entry file="DayThreeTest_Day_Three_getCoordinates_25_is_(4,_0) - 2018.04.13 at 08h 14m 32s.xml">
-      <configuration name="DayThreeTest.Day Three getCoordinates 25 is (4, 0)" configurationId="ScalaTestRunConfiguration" />
-    </history-entry>
     <history-entry file="DayThreeTest_Day_Three_getCoordinates_25_is_(4,_0) - 2018.04.13 at 08h 20m 58s.xml">
       <configuration name="DayThreeTest.Day Three getCoordinates 25 is (4, 0)" configurationId="ScalaTestRunConfiguration" />
     </history-entry>
@@ -632,6 +569,18 @@
       <configuration name="DayThreeTest" configurationId="ScalaTestRunConfiguration" />
     </history-entry>
     <history-entry file="DayThreeTest - 2018.04.13 at 08h 27m 13s.xml">
+      <configuration name="DayThreeTest" configurationId="ScalaTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="DayThreeTest - 2018.04.13 at 08h 27m 55s.xml">
+      <configuration name="DayThreeTest" configurationId="ScalaTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="DayThreeTest - 2018.04.13 at 08h 34m 39s.xml">
+      <configuration name="DayThreeTest" configurationId="ScalaTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="DayThreeTest - 2018.04.13 at 08h 36m 11s.xml">
+      <configuration name="DayThreeTest" configurationId="ScalaTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="DayThreeTest - 2018.04.13 at 08h 36m 21s.xml">
       <configuration name="DayThreeTest" configurationId="ScalaTestRunConfiguration" />
     </history-entry>
   </component>
@@ -653,7 +602,7 @@
       <window_info anchor="bottom" id="Terminal" />
       <window_info id="Capture Tool" />
       <window_info id="Designer" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24305555" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24305555" />
       <window_info anchor="bottom" id="sbt-shell-toolwindow" />
       <window_info anchor="bottom" id="Build" weight="0.3111413" />
       <window_info anchor="right" id="Gradle" />
@@ -661,7 +610,7 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" />
       <window_info anchor="right" id="Theme Preview" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.39945653" />
+      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.39945653" />
       <window_info id="Favorites" side_tool="true" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -746,27 +695,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/resources/AdventOfCode/DayTwo/DayTwoPartTwoTest.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="7" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/AdventOfCode/DayTwo/DayTwo.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
           <caret line="25" column="9" selection-start-line="25" selection-start-column="9" selection-end-line="25" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/scala/AdventOfCode/DayTwo/DayTwoTest.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="83" selection-start-line="8" selection-start-column="83" selection-end-line="8" selection-end-column="83" />
-          <folding>
-            <element signature="e#29#68#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -780,13 +712,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/resources/AdventOfCode/Utils/ReadFileAsInt.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="4" selection-start-column="4" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/scala/AdventOfCode/Utils/ReadFileUtilsTest.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -796,25 +721,49 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/scala/AdventOfCode/DayOne/DayOneTest.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
+        <state relative-caret-position="8">
           <caret line="6" selection-start-line="6" selection-end-line="8" selection-end-column="3" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/AdventOfCode/DayThree/DayThree.scala">
+    <entry file="file://$PROJECT_DIR$/src/test/resources/AdventOfCode/Utils/ReadFileAsInt.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="51" column="32" selection-start-line="51" selection-start-column="32" selection-end-line="51" selection-end-column="32" />
+        <state>
+          <caret column="4" selection-start-column="4" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/resources/AdventOfCode/DayTwo/DayTwoPartTwoTest.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="7" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/scala/AdventOfCode/DayTwo/DayTwoTest.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="83" selection-start-line="8" selection-start-column="83" selection-end-line="8" selection-end-column="83" />
+          <folding>
+            <element signature="e#29#68#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/scala/AdventOfCode/DayThree/DayThreeTest.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="79">
-          <caret line="7" selection-start-line="7" selection-end-line="21" selection-end-column="3" />
+        <state relative-caret-position="742">
+          <caret line="52" column="58" selection-start-line="52" selection-start-column="58" selection-end-line="52" selection-end-column="58" />
           <folding>
             <element signature="e#31#70#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/AdventOfCode/DayThree/DayThree.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="28" selection-start-line="5" selection-start-column="28" selection-end-line="5" selection-end-column="28" />
         </state>
       </provider>
     </entry>

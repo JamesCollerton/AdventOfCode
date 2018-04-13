@@ -3,18 +3,16 @@ package AdventOfCode.DayThree
 object DayThree {
 
   def main(args: Array[String]): Unit = {
-
+    println(partOne(325489))
   }
 
   def partOne(input: Int): Int = {
-    if(input == 1) return 1
-
-    getCoordinates(input)
-
-    -1
+    if(input == 1) return 0
+    val ((x, y), (centreX, centreY)) = getCoordinates(input)
+    Math.abs(x - centreX) + Math.abs(y - centreY)
   }
 
-  def getCoordinates(input: Int): (Int, Int) = {
+  def getCoordinates(input: Int): ((Int, Int), (Int, Int)) = {
 
     val root = Math.sqrt(input).toInt
 
@@ -28,6 +26,7 @@ object DayThree {
 
     val upperBoundSquare = upperBoundRoot * upperBoundRoot
     val sideLength = upperBoundRoot - 1
+    val centre = if(sideLength % 2 == 0) sideLength / 2 else sideLength / 2 + 1
     val sideInt = (upperBoundSquare - input) / (sideLength)
     val cornerDistance = (upperBoundSquare - sideInt * sideLength) - input
 
@@ -41,7 +40,7 @@ object DayThree {
       (sideLength, sideLength - cornerDistance)
     }
 
-    coordinates
+    (coordinates, (centre, centre))
   }
 
   def partTwo(input: Int): Int = {
