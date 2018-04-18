@@ -49,8 +49,9 @@ object DayThree {
 
   def makeGrid(input: Int): Int = {
     val startGrid = Grid(List(List(0, 0, 0), List(0, 1, 0), List(0, 0, 0)))
-    val startPosition = Coordinates(0, 0)
+    val startCoordinates = Coordinates(1, 0)
     val startDirection = Direction.EAST
+    val startPosition = Position(startGrid, startDirection, startCoordinates)
 //    val direction
     0
   }

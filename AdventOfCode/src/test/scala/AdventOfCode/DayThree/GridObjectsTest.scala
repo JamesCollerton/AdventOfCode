@@ -24,4 +24,23 @@ class GridObjectsTest extends FunSuite {
     assert(Direction.EAST.increment == Coordinates(1, 0))
   }
 
+  test("Grid Append Zeros correct") {
+    val gridOriginal = Grid(List(List(0, 0, 0), List(0, 1, 0), List(0, 0, 0)))
+    val gridExpected = Grid(List(List(0, 0, 0, 0, 0), List(0, 0, 0, 0, 0), List(0, 0, 1, 0, 0), List(0, 0, 0, 0, 0), List(0, 0, 0, 0, 0)))
+    assert(gridOriginal.appendZeroBorder() == gridExpected)
+  }
+
+  test("Sum surrounding points correct") {
+    val grid = Grid(List(List(1, 2, 3), List(4, 5, 6), List(7, 8, 9)))
+    val coordinates = Coordinates(1, 1)
+    assert(grid.sumSurroundingPoints(coordinates) == 40)
+  }
+
+  test("Convert coordinates correct") {
+    val grid = Grid(List(List(1, 2, 3), List(4, 5, 6), List(7, 8, 9)))
+    val coordinates = Coordinates(1, 1)
+
+    assert(grid.sumSurroundingPoints(coordinates) == 40)
+  }
+
 }
