@@ -2,6 +2,8 @@ package AdventOfCode.DayThree
 
 import AdventOfCode.DayThree.Direction.Direction
 
+case class Position(grid: Grid, direction: Direction, coordinates: Coordinates)
+
 case class Coordinates(x: Int, y: Int) {
 
   def convert(grid: Grid): Coordinates = {
@@ -10,22 +12,21 @@ case class Coordinates(x: Int, y: Int) {
 
 }
 
-case class Position(grid: Grid, direction: Direction, coordinates: Coordinates)
-
 case class Grid(grid: List[List[Int]]) {
 
   def calculateNextGrid(coordinates: Coordinates): Grid = {
 
-    // If we are going to go off the end need to add an extra row. Note,
-    // we always want the grid coordinates to be centred on zero.
+    // Convert the coordinates from (x, y) to array coordinates.
     val convertedCoordinates = coordinates.convert(this)
 
+    // If we are about to walk off the edge then add a border of zeros
     val newGrid = checkForAppend(convertedCoordinates);
 
-    // Otherwise sum all of the surrounding areas
+    // Sum all of the surrounding areas
     val surroundingSum = sumSurroundingPoints(convertedCoordinates)
 
-    Grid(grid)
+    // Change the current coordinates to be the sum
+    replace(convertedCoordinates, surroundingSum)
   }
 
   def checkForAppend(coordinates: Coordinates): Grid = {
@@ -55,6 +56,10 @@ case class Grid(grid: List[List[Int]]) {
     } yield d).sum
 
     sum
+  }
+
+  def replace(coordinates: Coordinates, newValue: Int): Grid = {
+    Grid(grid.updated(coordinates.y, grid(coordinates.y).updated(coordinates.x, newValue)))
   }
 
   def size: Int = {

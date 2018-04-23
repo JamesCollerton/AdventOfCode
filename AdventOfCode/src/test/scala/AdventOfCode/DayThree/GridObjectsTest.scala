@@ -92,4 +92,38 @@ class GridObjectsTest extends FunSuite {
     assert(grid.checkForAppend(coordinates) == grid.appendZeroBorder())
   }
 
+  test("Replace at (0,0)") {
+    val grid = Grid(List(List(1, 2, 3), List(4, 5, 6), List(7, 8, 9)))
+    val newGrid = Grid(List(List(100, 2, 3), List(4, 5, 6), List(7, 8, 9)))
+    val coordinates = Coordinates(0, 0)
+    val toReplace = 100
+
+    assert(grid.replace(coordinates, toReplace) == newGrid)
+  }
+
+  test("Replace at (2, 2)") {
+    val grid = Grid(List(List(1, 2, 3), List(4, 5, 6), List(7, 8, 9)))
+    val newGrid = Grid(List(List(1, 2, 3), List(4, 5, 6), List(7, 8, 100)))
+    val coordinates = Coordinates(2, 2)
+    val toReplace = 100
+
+    assert(grid.replace(coordinates, toReplace) == newGrid)
+  }
+
+  test("Calculate next grid, (0, 0)") {
+    val grid = Grid(List(List(1, 2, 3), List(4, 5, 6), List(7, 8, 9)))
+    val newGrid = Grid(List(List(1, 2, 3), List(4, 40, 6), List(7, 8, 9)))
+    val coordinates = Coordinates(0, 0)
+
+    assert(grid.calculateNextGrid(coordinates) == newGrid)
+  }
+
+  test("Calculate next grid, (-2, 1)") {
+    val grid = Grid(List(List(1, 2, 3, 4, 5), List(6, 7, 8, 9, 10), List(11, 12, 13, 14, 15), List(16, 17, 18, 19, 20), List(21, 22, 23, 24, 25)))
+    val newGrid = Grid(List(List(1, 2, 3, 4, 5), List(6, 56, 8, 9, 10), List(11, 12, 13, 14, 15), List(16, 17, 18, 19, 20), List(21, 22, 23, 24, 25)))
+    val coordinates = Coordinates(-1, 1)
+
+    assert(grid.calculateNextGrid(coordinates) == newGrid)
+  }
+
 }
