@@ -36,11 +36,32 @@ class GridObjectsTest extends FunSuite {
     assert(grid.sumSurroundingPoints(coordinates) == 40)
   }
 
-  test("Convert coordinates correct") {
+  test("Convert coordinates first quadrant correct") {
     val grid = Grid(List(List(1, 2, 3), List(4, 5, 6), List(7, 8, 9)))
     val coordinates = Coordinates(1, 1)
 
-    assert(grid.sumSurroundingPoints(coordinates) == 40)
+    assert(coordinates.convert(grid) == Coordinates(2, 0))
+  }
+
+  test("Convert coordinates second quadrant correct") {
+    val grid = Grid(List(List(1, 2, 3), List(4, 5, 6), List(7, 8, 9)))
+    val coordinates = Coordinates(-1, 1)
+
+    assert(coordinates.convert(grid) == Coordinates(0, 0))
+  }
+
+  test("Convert coordinates third quadrant correct") {
+    val grid = Grid(List(List(1, 2, 3), List(4, 5, 6), List(7, 8, 9)))
+    val coordinates = Coordinates(-1, -1)
+
+    assert(coordinates.convert(grid) == Coordinates(0, 2))
+  }
+
+  test("Convert coordinates fourth quadrant correct") {
+    val grid = Grid(List(List(1, 2, 3), List(4, 5, 6), List(7, 8, 9)))
+    val coordinates = Coordinates(1, -1)
+
+    assert(coordinates.convert(grid) == Coordinates(2, 2))
   }
 
 }

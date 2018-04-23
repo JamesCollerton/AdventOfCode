@@ -39,26 +39,26 @@
       <file leaf-file-name="DayThree.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/scala/AdventOfCode/DayThree/DayThree.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="491">
+            <state relative-caret-position="203">
               <caret line="51" column="40" selection-start-line="51" selection-start-column="40" selection-end-line="51" selection-end-column="40" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GridObjects.scala" pinned="false" current-in-tab="true">
+      <file leaf-file-name="GridObjects.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/scala/AdventOfCode/DayThree/GridObjects.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="14" column="42" selection-start-line="14" selection-start-column="42" selection-end-line="14" selection-end-column="42" />
+            <state relative-caret-position="105">
+              <caret line="7" column="16" lean-forward="true" selection-start-line="7" selection-start-column="16" selection-end-line="7" selection-end-column="31" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GridObjectsTest.scala" pinned="false" current-in-tab="false">
+      <file leaf-file-name="GridObjectsTest.scala" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/scala/AdventOfCode/DayThree/GridObjectsTest.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="297">
-              <caret line="41" selection-start-line="41" selection-end-line="41" />
+            <state relative-caret-position="249">
+              <caret line="63" column="56" selection-start-line="63" selection-start-column="56" selection-end-line="63" selection-end-column="56" />
             </state>
           </provider>
         </entry>
@@ -112,8 +112,8 @@
         <option value="$PROJECT_DIR$/src/test/scala/AdventOfCode/Utils/ReadFileUtilsTest.scala" />
         <option value="$PROJECT_DIR$/src/test/scala/AdventOfCode/DayThree/DayThreeTest.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/AdventOfCode/DayThree/DayThree.scala" />
-        <option value="$PROJECT_DIR$/src/test/scala/AdventOfCode/DayThree/GridObjectsTest.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/AdventOfCode/DayThree/GridObjects.scala" />
+        <option value="$PROJECT_DIR$/src/test/scala/AdventOfCode/DayThree/GridObjectsTest.scala" />
       </list>
     </option>
   </component>
@@ -563,15 +563,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="GridObjectsTest - 2018.04.14 at 09h 03m 44s.xml">
-      <configuration name="GridObjectsTest" configurationId="ScalaTestRunConfiguration" />
-    </history-entry>
-    <history-entry file="GridObjectsTest - 2018.04.14 at 09h 18m 24s.xml">
-      <configuration name="GridObjectsTest" configurationId="ScalaTestRunConfiguration" />
-    </history-entry>
-    <history-entry file="GridObjectsTest - 2018.04.14 at 09h 18m 33s.xml">
-      <configuration name="GridObjectsTest" configurationId="ScalaTestRunConfiguration" />
-    </history-entry>
     <history-entry file="GridObjectsTest - 2018.04.14 at 09h 18m 38s.xml">
       <configuration name="GridObjectsTest" configurationId="ScalaTestRunConfiguration" />
     </history-entry>
@@ -591,6 +582,15 @@
       <configuration name="GridObjectsTest" configurationId="ScalaTestRunConfiguration" />
     </history-entry>
     <history-entry file="GridObjectsTest - 2018.04.18 at 18h 00m 42s.xml">
+      <configuration name="GridObjectsTest" configurationId="ScalaTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="GridObjectsTest - 2018.04.23 at 08h 48m 13s.xml">
+      <configuration name="GridObjectsTest" configurationId="ScalaTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="GridObjectsTest - 2018.04.23 at 08h 48m 58s.xml">
+      <configuration name="GridObjectsTest" configurationId="ScalaTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="GridObjectsTest - 2018.04.23 at 08h 49m 49s.xml">
       <configuration name="GridObjectsTest" configurationId="ScalaTestRunConfiguration" />
     </history-entry>
   </component>
@@ -635,8 +635,17 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="1" />
+      <option name="time" value="2" />
     </breakpoint-manager>
+  </component>
+  <component name="debuggerHistoryManager">
+    <expressions id="evaluateExpression">
+      <expression>
+        <expression-string>(grid.size / 2)</expression-string>
+        <language-id>Scala</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/main/scala/AdventOfCode/DayThree/GridObjects.scala">
@@ -796,13 +805,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/AdventOfCode/DayThree/DayThree.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="491">
-          <caret line="51" column="40" selection-start-line="51" selection-start-column="40" selection-end-line="51" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/AdventOfCode/DayOne/DayOne.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-9">
@@ -817,17 +819,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/scala/AdventOfCode/DayThree/GridObjectsTest.scala">
+    <entry file="file://$PROJECT_DIR$/src/main/scala/AdventOfCode/DayThree/GridObjects.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="41" selection-start-line="41" selection-end-line="41" />
+        <state relative-caret-position="105">
+          <caret line="7" column="16" lean-forward="true" selection-start-line="7" selection-start-column="16" selection-end-line="7" selection-end-column="31" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/AdventOfCode/DayThree/GridObjects.scala">
+    <entry file="file://$PROJECT_DIR$/src/main/scala/AdventOfCode/DayThree/DayThree.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="14" column="42" selection-start-line="14" selection-start-column="42" selection-end-line="14" selection-end-column="42" />
+        <state relative-caret-position="203">
+          <caret line="51" column="40" selection-start-line="51" selection-start-column="40" selection-end-line="51" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/scala/AdventOfCode/DayThree/GridObjectsTest.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="249">
+          <caret line="63" column="56" selection-start-line="63" selection-start-column="56" selection-end-line="63" selection-end-column="56" />
         </state>
       </provider>
     </entry>
