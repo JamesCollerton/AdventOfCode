@@ -20,19 +20,23 @@ case class Grid(grid: List[List[Int]]) {
     // we always want the grid coordinates to be centred on zero.
     val convertedCoordinates = coordinates.convert(this)
 
-    val newGrid = if( convertedCoordinates.x >= size  ||
-        convertedCoordinates.x <= 0     ||
-        convertedCoordinates.y >= size  ||
-        convertedCoordinates.y <= 0) {
-      appendZeroBorder()
-    } else {
-      this
-    }
+    val newGrid = checkForAppend(convertedCoordinates);
 
     // Otherwise sum all of the surrounding areas
     val surroundingSum = sumSurroundingPoints(convertedCoordinates)
 
     Grid(grid)
+  }
+
+  def checkForAppend(coordinates: Coordinates): Grid = {
+    if( coordinates.x >= size - 1 ||
+        coordinates.x <= 0        ||
+        coordinates.y >= size - 1 ||
+        coordinates.y <= 0) {
+      appendZeroBorder()
+    } else {
+      this
+    }
   }
 
   def appendZeroBorder(): Grid = {

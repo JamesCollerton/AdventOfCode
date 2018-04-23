@@ -64,4 +64,32 @@ class GridObjectsTest extends FunSuite {
     assert(coordinates.convert(grid) == Coordinates(2, 2))
   }
 
+  test("Check for append left correct") {
+    val grid = Grid(List(List(1, 2, 3), List(4, 5, 6), List(7, 8, 9)))
+    val coordinates = Coordinates(0, 1)
+
+    assert(grid.checkForAppend(coordinates) == grid.appendZeroBorder())
+  }
+
+  test("Check for append right correct") {
+    val grid = Grid(List(List(1, 2, 3), List(4, 5, 6), List(7, 8, 9)))
+    val coordinates = Coordinates(2, 1)
+
+    assert(grid.checkForAppend(coordinates) == grid.appendZeroBorder())
+  }
+
+  test("Check for append top correct") {
+    val grid = Grid(List(List(1, 2, 3), List(4, 5, 6), List(7, 8, 9)))
+    val coordinates = Coordinates(1, 0)
+
+    assert(grid.checkForAppend(coordinates) == grid.appendZeroBorder())
+  }
+
+  test("Check for append bottom correct") {
+    val grid = Grid(List(List(1, 2, 3), List(4, 5, 6), List(7, 8, 9)))
+    val coordinates = Coordinates(1, 2)
+
+    assert(grid.checkForAppend(coordinates) == grid.appendZeroBorder())
+  }
+
 }
