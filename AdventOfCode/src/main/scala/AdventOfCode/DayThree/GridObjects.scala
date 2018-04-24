@@ -23,17 +23,17 @@ case class Grid(grid: List[List[Int]]) {
     val newGrid = checkForAppend(convertedCoordinates);
 
     // Sum all of the surrounding areas
-    val surroundingSum = sumSurroundingPoints(convertedCoordinates)
+    val surroundingSum = newGrid.sumSurroundingPoints(convertedCoordinates)
 
     // Change the current coordinates to be the sum
     replace(convertedCoordinates, surroundingSum)
   }
 
   def checkForAppend(coordinates: Coordinates): Grid = {
-    if( coordinates.x >= size - 1 ||
-        coordinates.x <= 0        ||
-        coordinates.y >= size - 1 ||
-        coordinates.y <= 0) {
+    if( coordinates.x + 1 >= size - 1 ||
+        coordinates.x - 1 <= 0        ||
+        coordinates.y + 1 >= size - 1 ||
+        coordinates.y - 1 <= 0) {
       appendZeroBorder()
     } else {
       this
@@ -66,6 +66,17 @@ case class Grid(grid: List[List[Int]]) {
     grid.size
   }
 
+  def atCorner(coordinates: Coordinates): Boolean = {
+      // Top right corner
+      (coordinates.x == grid.size -1 && coordinates.y == 0) ||
+      // Top left corner
+      (coordinates.x == 0 && coordinates.y == 0) ||
+      // Bottom left corner
+      (coordinates.x == 0 && coordinates.y == grid.size - 1) ||
+      // Bottom right corner
+      (coordinates.x == grid.size - 1 && coordinates.y == grid.size - 1)
+  }
+
 }
 
 object Mover {
@@ -78,6 +89,9 @@ object Mover {
     val nextY = position.coordinates.y + position.direction.increment.y
     val nextCoordinates = Coordinates(nextX, nextY)
 
+    // If we are at a corner then change direction.
+//    if(nextGrid.atCorner(
+//    ))
     val nextDirection = position.direction.nextDirection
 
     Position(nextGrid, nextDirection, nextCoordinates)
