@@ -30,10 +30,10 @@ case class Grid(grid: List[List[Int]]) {
   }
 
   def checkForAppend(coordinates: Coordinates): Grid = {
-    if( coordinates.x + 1 >= size - 1 ||
-        coordinates.x - 1 <= 0        ||
-        coordinates.y + 1 >= size - 1 ||
-        coordinates.y - 1 <= 0) {
+    if( coordinates.x >= size - 1 ||
+        coordinates.x <= 0        ||
+        coordinates.y >= size - 1 ||
+        coordinates.y <= 0) {
       appendZeroBorder()
     } else {
       this
@@ -81,7 +81,7 @@ case class Grid(grid: List[List[Int]]) {
 
 object Mover {
 
-  def move(position: Position): Position = {
+  def moveSide(position: Position, remainingSteps: Int): Position = {
 
     val nextGrid = position.grid.calculateNextGrid(position.coordinates)
 
@@ -89,10 +89,7 @@ object Mover {
     val nextY = position.coordinates.y + position.direction.increment.y
     val nextCoordinates = Coordinates(nextX, nextY)
 
-    // If we are at a corner then change direction.
-//    if(nextGrid.atCorner(
-//    ))
-    val nextDirection = position.direction.nextDirection
+    val nextDirection = if(remainingSteps == 0) position.direction.nextDirection else position.direction
 
     Position(nextGrid, nextDirection, nextCoordinates)
 

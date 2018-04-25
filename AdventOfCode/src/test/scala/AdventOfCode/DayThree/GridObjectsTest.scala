@@ -118,7 +118,7 @@ class GridObjectsTest extends FunSuite {
     assert(grid.calculateNextGrid(coordinates) == newGrid)
   }
 
-  test("Calculate next grid, (-2, 1)") {
+  test("Calculate next grid, (-1, 1)") {
     val grid = Grid(List(List(1, 2, 3, 4, 5), List(6, 7, 8, 9, 10), List(11, 12, 13, 14, 15), List(16, 17, 18, 19, 20), List(21, 22, 23, 24, 25)))
     val newGrid = Grid(List(List(1, 2, 3, 4, 5), List(6, 56, 8, 9, 10), List(11, 12, 13, 14, 15), List(16, 17, 18, 19, 20), List(21, 22, 23, 24, 25)))
     val coordinates = Coordinates(-1, 1)
@@ -137,7 +137,7 @@ class GridObjectsTest extends FunSuite {
     val newDirection = Direction.WEST
     val newPosition = Position(newGrid, newDirection, newCoordinates)
 
-    assert(Mover.move(position) == newPosition)
+    assert(Mover.moveSide(position, 0) == newPosition)
   }
 
   test("Mover, second step") {
@@ -151,7 +151,7 @@ class GridObjectsTest extends FunSuite {
     val newDirection = Direction.WEST
     val newPosition = Position(newGrid, newDirection, newCoordinates)
 
-    assert(Mover.move(position) == newPosition)
+    assert(Mover.moveSide(position, 0) == newPosition)
   }
 
 }
