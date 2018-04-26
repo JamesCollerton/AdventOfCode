@@ -126,32 +126,60 @@ class GridObjectsTest extends FunSuite {
     assert(grid.calculateNextGrid(coordinates) == newGrid)
   }
 
-  test("Mover, first step") {
+  test("Move side, first step") {
     val grid = Grid(List(List(0, 0, 0), List(0, 1, 0), List(0, 0, 0)))
     val coordinates = Coordinates(1, 0)
     val direction = Direction.NORTH
     val position = Position(grid, direction, coordinates)
 
     val newGrid = Grid(List(List(0, 0, 0), List(0, 1, 1), List(0, 0, 0)))
-    val newCoordinates = Coordinates(1, 1)
+    val newCoordinates = Coordinates(1, 0)
     val newDirection = Direction.WEST
     val newPosition = Position(newGrid, newDirection, newCoordinates)
 
     assert(Mover.moveSide(position, 0) == newPosition)
   }
 
-  test("Mover, second step") {
+  test("Move side, top side") {
     val grid = Grid(List(List(0, 0, 0), List(0, 1, 1), List(0, 0, 0)))
     val coordinates = Coordinates(1, 1)
     val direction = Direction.WEST
     val position = Position(grid, direction, coordinates)
 
-    val newGrid = Grid(List(List(0, 0, 2), List(0, 1, 1), List(0, 0, 0)))
-    val newCoordinates = Coordinates(0, 1)
-    val newDirection = Direction.WEST
+    val newGrid = Grid(List(List(5, 4, 2), List(0, 1, 1), List(0, 0, 0)))
+    val newCoordinates = Coordinates(-1, 1)
+    val newDirection = Direction.SOUTH
     val newPosition = Position(newGrid, newDirection, newCoordinates)
 
-    assert(Mover.moveSide(position, 0) == newPosition)
+    assert(Mover.moveSide(position, 2) == newPosition)
+  }
+
+  test("Move side, left side") {
+    val grid = Grid(List(List(5, 4, 2), List(0, 1, 1), List(0, 0, 0)))
+    val coordinates = Coordinates(-1, 1)
+    val direction = Direction.SOUTH
+    val position = Position(grid, direction, coordinates)
+
+    val newGrid = Grid(List(List(5, 4, 2), List(10, 1, 1), List(11, 0, 0)))
+    val newCoordinates = Coordinates(-1, -1)
+    val newDirection = Direction.EAST
+    val newPosition = Position(newGrid, newDirection, newCoordinates)
+
+    assert(Mover.moveSide(position, 2) == newPosition)
+  }
+
+  test("Move side, bottom side") {
+    val grid = Grid(List(List(5, 4, 2), List(10, 1, 1), List(11, 0, 0)))
+    val coordinates = Coordinates(-1, -1)
+    val direction = Direction.EAST
+    val position = Position(grid, direction, coordinates)
+
+    val newGrid = Grid(List(List(5, 4, 2), List(10, 1, 1), List(11, 23, 25)))
+    val newCoordinates = Coordinates(1, -1)
+    val newDirection = Direction.NORTH
+    val newPosition = Position(newGrid, newDirection, newCoordinates)
+
+    assert(Mover.moveSide(position, 2) == newPosition)
   }
 
 }

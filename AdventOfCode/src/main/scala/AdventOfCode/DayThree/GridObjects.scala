@@ -22,8 +22,11 @@ case class Grid(grid: List[List[Int]]) {
     // If we are about to walk off the edge then add a border of zeros
     val newGrid = checkForAppend(convertedCoordinates);
 
+    // Convert the coordinates from (x, y) to array coordinates.
+    val appendedConvertedCoordinates = coordinates.convert(newGrid)
+
     // Sum all of the surrounding areas
-    val surroundingSum = newGrid.sumSurroundingPoints(convertedCoordinates)
+    val surroundingSum = newGrid.sumSurroundingPoints(appendedConvertedCoordinates)
 
     // Change the current coordinates to be the sum
     replace(convertedCoordinates, surroundingSum)
@@ -81,17 +84,23 @@ case class Grid(grid: List[List[Int]]) {
 
 object Mover {
 
+  @annotation.tailrec
   def moveSide(position: Position, remainingSteps: Int): Position = {
 
+    // Calculate new grid
     val nextGrid = position.grid.calculateNextGrid(position.coordinates)
 
+    // If we're done then turn on the spot
+    if(remainingSteps == 0) {
+      return Position(nextGrid, position.direction.nextDirection, position.coordinates)
+    }
+
+    // Otherwise move forward
     val nextX = position.coordinates.x + position.direction.increment.x
     val nextY = position.coordinates.y + position.direction.increment.y
     val nextCoordinates = Coordinates(nextX, nextY)
 
-    val nextDirection = if(remainingSteps == 0) position.direction.nextDirection else position.direction
-
-    Position(nextGrid, nextDirection, nextCoordinates)
+    moveSide(Position(nextGrid, position.direction, nextCoordinates), remainingSteps - 1)
 
   }
 
