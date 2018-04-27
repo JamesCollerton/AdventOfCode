@@ -182,4 +182,18 @@ class GridObjectsTest extends FunSuite {
     assert(Mover.moveSide(position, 2) == newPosition)
   }
 
+  test("Make circle, 4x4") {
+    val grid = Grid(List(List(5, 4, 2), List(10, 1, 1), List(11, 23, 25))).appendZeroBorder()
+    val coordinates = Coordinates(2, -1)
+    val direction = Direction.NORTH
+    val position = Position(grid, direction, coordinates)
+
+    val newGrid = Grid(List(List(0, 0, 0, 0, 0, 0, 0), List(0, 147, 142, 133, 122, 59, 0), List(0, 304, 5, 4, 2, 57, 0), List(0, 330, 10, 1, 1, 54, 0), List(0, 351, 11, 23, 25, 26, 0), List(0, 362, 747, 806, 880, 931, 957), List(0, 0, 0, 0, 0, 0, 0)))
+    val newCoordinates = Coordinates(3, -2)
+    val newDirection = Direction.NORTH
+    val newPosition = Position(newGrid, newDirection, newCoordinates)
+
+    assert(Mover.makeCircle(position, 3) == newPosition)
+  }
+
 }

@@ -20,7 +20,7 @@ case class Grid(grid: List[List[Int]]) {
     val convertedCoordinates = coordinates.convert(this)
 
     // If we are about to walk off the edge then add a border of zeros
-    val newGrid = checkForAppend(convertedCoordinates);
+    val newGrid = checkForAppend(convertedCoordinates)
 
     // Convert the coordinates from (x, y) to array coordinates.
     val appendedConvertedCoordinates = coordinates.convert(newGrid)
@@ -83,6 +83,22 @@ case class Grid(grid: List[List[Int]]) {
 }
 
 object Mover {
+
+  def makeCircle(position: Position, sideLength: Int): Position = {
+
+    // Move up
+    val topRight = moveSide(position, sideLength)
+    // Move left
+    val topLeft = moveSide(topRight, sideLength + 1)
+    // Move down
+    val bottomLeft = moveSide(topLeft, sideLength + 1)
+
+    val expandedBottomLeft = Position(bottomLeft.grid.appendZeroBorder(), bottomLeft.direction, bottomLeft.coordinates)
+
+    // Move right again
+    moveSide(expandedBottomLeft, sideLength + 2)
+
+  }
 
   @annotation.tailrec
   def moveSide(position: Position, remainingSteps: Int): Position = {
