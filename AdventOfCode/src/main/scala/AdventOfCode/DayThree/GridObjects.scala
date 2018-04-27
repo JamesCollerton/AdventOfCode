@@ -4,6 +4,8 @@ import AdventOfCode.DayThree.Direction.Direction
 
 case class Position(grid: Grid, direction: Direction, coordinates: Coordinates)
 
+case class Solution(solved: Boolean, answer: Int)
+
 case class Coordinates(x: Int, y: Int) {
 
   def convert(grid: Grid): Coordinates = {
@@ -69,20 +71,25 @@ case class Grid(grid: List[List[Int]]) {
     grid.size
   }
 
-  def atCorner(coordinates: Coordinates): Boolean = {
-      // Top right corner
-      (coordinates.x == grid.size -1 && coordinates.y == 0) ||
-      // Top left corner
-      (coordinates.x == 0 && coordinates.y == 0) ||
-      // Bottom left corner
-      (coordinates.x == 0 && coordinates.y == grid.size - 1) ||
-      // Bottom right corner
-      (coordinates.x == grid.size - 1 && coordinates.y == grid.size - 1)
-  }
-
 }
 
 object Mover {
+
+  def move: Int = {
+
+    def loop(position: Position, sideLength: Int): Int = {
+      1
+//      makeCircle(position, sideLength)
+    }
+
+    val startGrid = Grid(List(List((1)))).appendZeroBorder()
+    val startCoordinates = Coordinates(1, 0)
+    val startDirection = Direction.NORTH
+    val startPosition = Position(startGrid, startDirection, startCoordinates)
+
+    loop(startPosition, 1)
+
+  }
 
   def makeCircle(position: Position, sideLength: Int): Position = {
 
