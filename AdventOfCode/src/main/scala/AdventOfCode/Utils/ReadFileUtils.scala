@@ -14,7 +14,11 @@ object ReadFileUtils {
     readFileAsString(filename).toInt
   }
 
-  def readFileAsIntList(filename: String): List[List[Int]] = {
+  def readFileAsIntList(filename: String): List[Int] = {
+    readFileAsStringList(filename).map(s => s.toInt).toList
+  }
+
+  def readFileAsIntListList(filename: String): List[List[Int]] = {
     readFileAsStringList(filename).map(s => s.split("\\s+").map(s => s.toInt).toList)
   }
 

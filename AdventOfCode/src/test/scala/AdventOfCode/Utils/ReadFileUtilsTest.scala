@@ -12,8 +12,12 @@ class ReadFileUtilsTest extends FunSuite {
     assert(ReadFileUtils.readFileAsStringList("/AdventOfCode/Utils/ReadFileAsStringList.txt") == List("1234", "abcde", "?!?"))
   }
 
+  test("Read file as int list list") {
+    assert(ReadFileUtils.readFileAsIntListList("/AdventOfCode/Utils/ReadFileAsIntListList.txt") == List(List(1,2,3,4), List(5,6,7), List(8,9,10)))
+  }
+
   test("Read file as int list") {
-    assert(ReadFileUtils.readFileAsIntList("/AdventOfCode/Utils/ReadFileAsIntList.txt") == List(List(1,2,3,4), List(5,6,7), List(8,9,10)))
+    assert(ReadFileUtils.readFileAsIntList("/AdventOfCode/Utils/ReadFileAsIntList.txt") == List(0, 3, 0, 1, -3))
   }
 
   test("Read file as int") {

@@ -6,7 +6,7 @@ object DayTwo {
 
   def main(args: Array[String]): Unit = {
 
-    val input = ReadFileUtils.readFileAsIntList("/AdventOfCode/DayTwo/DayTwo.txt")
+    val input = ReadFileUtils.readFileAsIntListList("/AdventOfCode/DayTwo/DayTwo.txt")
 
     List(partOne(input), partTwo(input)).zipWithIndex.foreach{ case (ans, i) => println(s"Part $i answer: $ans") }
 
