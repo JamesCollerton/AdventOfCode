@@ -7,14 +7,22 @@ object DaySix {
   def main(args: Array[String]): Unit = {
     val input = ReadFileUtils.readFileAsIntListList("/AdventOfCode/DaySix/DaySix.txt")(0)
     println(partOne(input))
+    println(partTwo(input))
   }
 
   def partOne(input: List[Int]): Int = {
-    nextStep(input, List(input), 0)
+    val (stoppingConfig, steps) = nextStep(input, List(input), 0, List())((conf, newInp, inp) => conf.contains(newInp))
+    steps
+  }
+
+  def partTwo(input: List[Int]): Int = {
+    val (stoppingConfig, steps) = nextStep(input, List(input), 0, List())((conf, newInp, inp) => conf.contains(newInp))
+    val (secondStoppingConfig, secondSteps) = nextStep(stoppingConfig, List(input), 0, stoppingConfig)((conf, newInp, inp) => newInp == inp)
+    secondSteps
   }
 
   @annotation.tailrec
-  def nextStep(input: List[Int], configurations: List[List[Int]], steps: Int): Int = {
+  def nextStep(input: List[Int], configurations: List[List[Int]], steps: Int, staticInput: List[Int])(f: (List[List[Int]], List[Int], List[Int]) => Boolean): (List[Int], Int) = {
 
     val maxIndex = findMaxIndex(input)
     val maxValue = input(maxIndex)
@@ -22,11 +30,11 @@ object DaySix {
 
     val newInput = redistributeBlocks(resetMaxBlock, (maxIndex + 1) % input.length, maxValue)
 
-    if(configurations.contains(newInput)) return steps + 1
+    if(f(configurations, newInput, staticInput)) return (input, steps + 1)
 
     val newConfigurations = configurations :+ newInput
 
-    nextStep(newInput, newConfigurations, steps + 1)
+    nextStep(newInput, newConfigurations, steps + 1, staticInput)(f)
   }
 
   @annotation.tailrec
