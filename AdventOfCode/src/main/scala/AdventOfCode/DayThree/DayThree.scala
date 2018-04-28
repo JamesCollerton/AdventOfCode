@@ -4,6 +4,7 @@ object DayThree {
 
   def main(args: Array[String]): Unit = {
     println(partOne(325489))
+    println(partTwo(325489))
   }
 
   def partOne(input: Int): Int = {
@@ -43,17 +44,8 @@ object DayThree {
     (coordinates, (centre, centre))
   }
 
-  def partTwo(input: Int): Int = {
-    -1
-  }
-
-  def makeGrid(input: Int): Int = {
-    val startGrid = Grid(List(List(0, 0, 0), List(0, 1, 0), List(0, 0, 0)))
-    val startCoordinates = Coordinates(1, 0)
-    val startDirection = Direction.EAST
-    val startPosition = Position(startGrid, startDirection, startCoordinates)
-//    val direction
-    0
+  def partTwo(input: Int): Unit = {
+    Mover.move
   }
 
 }

@@ -30,6 +30,11 @@ case class Grid(grid: List[List[Int]]) {
     // Sum all of the surrounding areas
     val surroundingSum = newGrid.sumSurroundingPoints(appendedConvertedCoordinates)
 
+    if(surroundingSum > 325489) {
+      println("Answer " + surroundingSum)
+      System.exit(0)
+    }
+
     // Change the current coordinates to be the sum
     replace(convertedCoordinates, surroundingSum)
   }
@@ -75,11 +80,12 @@ case class Grid(grid: List[List[Int]]) {
 
 object Mover {
 
-  def move: Int = {
+  def move: Unit = {
 
-    def loop(position: Position, sideLength: Int): Int = {
-      1
-//      makeCircle(position, sideLength)
+    // Terribly coded, but just exits in the program
+    def loop(position: Position, sideLength: Int): Unit = {
+      val newPosition = makeCircle(position, sideLength)
+      loop(newPosition, sideLength + 2)
     }
 
     val startGrid = Grid(List(List((1)))).appendZeroBorder()
