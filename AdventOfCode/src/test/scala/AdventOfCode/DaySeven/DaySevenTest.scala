@@ -1,6 +1,5 @@
 package AdventOfCode.DaySeven
 
-import AdventOfCode.DaySeven.DaySeven.Node
 import org.scalatest.FunSuite
 
 class DaySevenTest extends FunSuite {

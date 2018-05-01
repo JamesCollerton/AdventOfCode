@@ -3,13 +3,13 @@ package AdventOfCode.DaySeven
 object DaySeven {
 
   def main(args: Array[String]): Unit = {
-    println("Hello, world.")
+    readLineToSingleNode("A B", NodeMap(Map()))
   }
 
-  case class Node(name: String, value: Int, subNodes: Vector[Node])
-
-  def readLineToNode(line: String): Node = {
-    Node("Test", 1, Vector())
+  def readLineToSingleNode(line: String, nodeMap: NodeMap): Node = {
+    val Array(name, weight) = line.split("\\s+").take(2)
+    println(name + "/" + weight)
+    Node("", 0, Vector())
   }
 
 }
