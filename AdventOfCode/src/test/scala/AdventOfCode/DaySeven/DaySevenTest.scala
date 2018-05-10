@@ -6,7 +6,10 @@ class DaySevenTest extends FunSuite {
 
   test("Read line to node fwft (72) -> ktlj, cntj, xhth") {
     assert(DaySeven.readLineToSingleNode("fwft (72) -> ktlj, cntj, xhth") == Node("fwft", 72, Vector()))
-//    assertTrue(DaySeven.readLineToNode("fwft (72) -> ktlj, cntj, xhth") == Node("fwft", 72, Vector()))
+  }
+
+  test("Generate node map fwft (72) -> ktlj, cntj, xhth") {
+    assert(DaySeven.generateNodeMap(List("fwft (72) -> ktlj, cntj, xhth")) == NodeMap(Map("fwft" -> Node("fwft", 72, Vector()))))
   }
 
 }

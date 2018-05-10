@@ -26,4 +26,17 @@ object DaySeven {
     Node(name, cleanWeight, Vector())
   }
 
+  def generateTree(input: List[String], nodeMap: NodeMap): Node = {
+
+    val completeNodes = input.map(line => {
+        val splitLine = line.split("\\s+")
+        val nodeKey = splitLine.take(1)(0)
+        val subNodeKeys = splitLine.drop(2)
+        val node = nodeMap.get(nodeKey).get
+        val subNodes = subNodeKeys.map(k => nodeMap.get(k).get).toVector
+        Node(node.name, node.value, subNodes)
+    })
+    
+  }
+
 }
