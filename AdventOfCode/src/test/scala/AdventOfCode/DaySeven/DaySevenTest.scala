@@ -9,7 +9,7 @@ class DaySevenTest extends FunSuite {
   }
 
   test("Generate node map fwft (72) -> ktlj, cntj, xhth") {
-    assert(DaySeven.generateNodeMap(List("fwft (72) -> ktlj, cntj, xhth")) == NodeMap(Map("fwft" -> Node("fwft", 72, Vector()))))
+    assert(DaySeven.generateBaseNodeMap(List("fwft (72) -> ktlj, cntj, xhth")) == NodeMap(Map("fwft" -> Node("fwft", 72, Vector()))))
   }
 
 }

@@ -6,14 +6,16 @@ object DaySeven {
 
   def main(args: Array[String]): Unit = {
     val input = ReadFileUtils.readFileAsStringList("/AdventOfCode/DaySeven/DaySeven.txt")
-    partOne(input)
+    println(partOne(input).name)
   }
 
-  def partOne(input: List[String]): Unit = {
-    val nodeMap = generateNodeMap(input)
+  def partOne(input: List[String]): Node = {
+    val baseNodeMap = generateBaseNodeMap(input)
+    val completeNodeMap = generateCompleteNodeMap(input, baseNodeMap)
+    findBottom(completeNodeMap)
   }
 
-  def generateNodeMap(input: List[String]): NodeMap = {
+  def generateBaseNodeMap(input: List[String]): NodeMap = {
     NodeMap((for {
       inputLine <- input
       node = readLineToSingleNode(inputLine)
@@ -26,17 +28,25 @@ object DaySeven {
     Node(name, cleanWeight, Vector())
   }
 
-  def generateTree(input: List[String], nodeMap: NodeMap): Node = {
-
-    val completeNodes = input.map(line => {
+  def generateCompleteNodeMap(input: List[String], nodeMap: NodeMap): NodeMap = {
+    NodeMap(input.map(line => {
         val splitLine = line.split("\\s+")
         val nodeKey = splitLine.take(1)(0)
-        val subNodeKeys = splitLine.drop(2)
+        val subNodeKeys = splitLine.drop(3).map(str => str.replaceAll(",", ""))
         val node = nodeMap.get(nodeKey).get
         val subNodes = subNodeKeys.map(k => nodeMap.get(k).get).toVector
-        Node(node.name, node.value, subNodes)
-    })
-    
+       (node.name, Node(node.name, node.value, subNodes))
+    }).toMap)
+
+  }
+
+  def findBottom(nodeMap: NodeMap): Node = {
+    val allNodes = nodeMap.nodes.valuesIterator.toList
+    val allNodeNames = allNodes.map(n => n.name)
+    val supportedNodeNames = allNodes.flatMap(n => n.subNodes).map(n => n.name)
+    val bottomNodeName = allNodeNames.filterNot(supportedNodeNames.toSet)(0)
+
+    nodeMap.get(bottomNodeName).get
   }
 
 }
