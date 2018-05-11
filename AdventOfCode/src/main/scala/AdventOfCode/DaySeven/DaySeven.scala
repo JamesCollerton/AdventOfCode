@@ -21,7 +21,6 @@ object DaySeven {
     val inputMap = generateInputMap(input)
     val tree = generateTree(inputMap.get(bottom.name).get, bottom.name, inputMap)
     val subNodeSums = tree.subNodes.map(sumTree)
-    1
   }
 
   def sumTree(node: Node): Int = {
@@ -30,7 +29,8 @@ object DaySeven {
     if(groupedNodes.size > 1) {
       val majorityValue = groupedNodes.maxBy(_._2.size)
       val minorityValue = groupedNodes.minBy(_._2.size)
-      val adjustedValue = minorityValue + (majorityValue(0)._1 - minorityValue)
+      val adjustedValue = minorityValue._1 + (majorityValue._1 - minorityValue._1)
+      println(adjustedValue)
     }
     node.value + node.subNodes.map(sumTree).sum
   }
