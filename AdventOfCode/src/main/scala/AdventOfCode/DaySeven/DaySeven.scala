@@ -7,6 +7,7 @@ object DaySeven {
   def main(args: Array[String]): Unit = {
     val input = ReadFileUtils.readFileAsStringList("/AdventOfCode/DaySeven/DaySeven.txt")
     println(partOne(input).name)
+    println(partTwo(input))
   }
 
   def partOne(input: List[String]): Node = {
@@ -18,7 +19,14 @@ object DaySeven {
   def partTwo(input: List[String]): Int = {
     val baseNodeMap = generateBaseNodeMap(input)
     val completeNodeMap = generateCompleteNodeMap(input, baseNodeMap)
+    val bottom = findBottom(completeNodeMap)
+    val treeAmount = bottom.subNodes.map(sumTree)
+
     1
+  }
+
+  def sumTree(node: Node): Int = {
+    node.value + node.subNodes.map(sumTree).sum
   }
 
   def generateBaseNodeMap(input: List[String]): NodeMap = {
