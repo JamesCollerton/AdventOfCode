@@ -15,6 +15,12 @@ object DaySeven {
     findBottom(completeNodeMap)
   }
 
+  def partTwo(input: List[String]): Int = {
+    val baseNodeMap = generateBaseNodeMap(input)
+    val completeNodeMap = generateCompleteNodeMap(input, baseNodeMap)
+    1
+  }
+
   def generateBaseNodeMap(input: List[String]): NodeMap = {
     NodeMap((for {
       inputLine <- input
@@ -37,7 +43,6 @@ object DaySeven {
         val subNodes = subNodeKeys.map(k => nodeMap.get(k).get).toVector
        (node.name, Node(node.name, node.value, subNodes))
     }).toMap)
-
   }
 
   def findBottom(nodeMap: NodeMap): Node = {
