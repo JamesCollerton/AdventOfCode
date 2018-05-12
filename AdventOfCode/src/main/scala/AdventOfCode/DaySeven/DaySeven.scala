@@ -20,19 +20,24 @@ object DaySeven {
     val bottom = partOne(input)
     val inputMap = generateInputMap(input)
     val tree = generateTree(inputMap.get(bottom.name).get, bottom.name, inputMap)
-    val subNodeSums = tree.subNodes.map(sumTree)
+    tree.subNodes.map(sumTree).groupBy(_._2).minBy(_._1)._1
   }
 
-  def sumTree(node: Node): Int = {
-    val subNodesTotals = node.subNodes.map(n => (n, sumTree(n)))
+  def sumTree(node: Node): (Boolean, Int) = {
+    
+    val subNodesResults = node.subNodes.map(n => (n, sumTree(n)))
+    val foundValue = subNodesResults.filter(_._2._1)
+    if(foundValue.length > 0) return (true, foundValue(0)._2._2)
+
+    val subNodesTotals = subNodesResults.map(p => (p._1, p._2._2))
     val groupedNodes = subNodesTotals.groupBy(_._2)
     if(groupedNodes.size > 1) {
       val majorityValue = groupedNodes.maxBy(_._2.size)
       val minorityValue = groupedNodes.minBy(_._2.size)
-      val adjustedValue = minorityValue._1 + (majorityValue._1 - minorityValue._1)
-      println(adjustedValue)
+      val adjustedValue = minorityValue._2(0)._1.value. + (majorityValue._1 - minorityValue._1)
+      return (true, adjustedValue)
     }
-    node.value + node.subNodes.map(sumTree).sum
+    (false, node.value + subNodesTotals.map(_._2).sum)
   }
 
   def generateBaseNodeMap(input: List[String]): NodeMap = {
