@@ -39,7 +39,7 @@ object DaySeven {
     }
 
     (false, node.value + subNodesTotals.map(_._2).sum)
-    
+
   }
 
   def generateBaseNodeMap(input: List[String]): NodeMap = {
