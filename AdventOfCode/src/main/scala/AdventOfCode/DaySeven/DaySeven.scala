@@ -24,7 +24,7 @@ object DaySeven {
   }
 
   def sumTree(node: Node): (Boolean, Int) = {
-    
+
     val subNodesResults = node.subNodes.map(n => (n, sumTree(n)))
     val foundValue = subNodesResults.filter(_._2._1)
     if(foundValue.length > 0) return (true, foundValue(0)._2._2)
@@ -37,7 +37,9 @@ object DaySeven {
       val adjustedValue = minorityValue._2(0)._1.value. + (majorityValue._1 - minorityValue._1)
       return (true, adjustedValue)
     }
+
     (false, node.value + subNodesTotals.map(_._2).sum)
+    
   }
 
   def generateBaseNodeMap(input: List[String]): NodeMap = {
