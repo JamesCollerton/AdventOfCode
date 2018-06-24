@@ -2,20 +2,25 @@ package AdventOfCode.DayEight
 
 import AdventOfCode.Utils.ReadFileUtils
 
-import scala.collection.immutable.HashMap
 import scala.reflect.runtime.universe
 import scala.tools.reflect.ToolBox
 
 object DayEight {
 
   def main(args: Array[String]): Unit = {
-    println(partOne("/AdventOfCode/DayEight/DayEight.txt"))
+    val registersMax = part("/AdventOfCode/DayEight/DayEight.txt")
+    println(partOne(registersMax._1))
+    println(registersMax._2)
   }
 
-  def partOne(filename: String): Int = {
+  def part(filename: String): (Map[String, Int], Int) = {
     val instructions = parseInput(filename)
     val registers = createRegisters(instructions)
-    findAllRegisters(instructions, registers).maxBy(_._2)._2
+    findAllRegisters(instructions, registers, 0)
+  }
+
+  def partOne(registers: Map[String, Int]): Int = {
+    registers.maxBy(_._2)._2
   }
 
   def parseInput(filename: String): List[Instruction] = {
@@ -32,29 +37,29 @@ object DayEight {
   }
 
   @annotation.tailrec
-  def findAllRegisters(instructions: List[Instruction], registers: Map[String, Int]): Map[String, Int] = {
+  def findAllRegisters(instructions: List[Instruction], registers: Map[String, Int], max: Int): (Map[String, Int], Int) = {
     if(instructions.isEmpty) {
-      return registers
+      return (registers, max)
     }
 
     val currentInstruction = instructions.head
     val shouldUpdate = currentInstruction.shouldUpdate(registers)
 
-    val updatedRegisters = if(shouldUpdate) {
+    val (updatedRegisters, newMax) = if(shouldUpdate) {
 
       val newValue = currentInstruction.getNewValue(registers)
 
-      registers + (currentInstruction.regToChange -> newValue)
+      val newMax = if(newValue > max) newValue else max
+
+      (registers + (currentInstruction.regToChange -> newValue), newMax)
 
     } else {
 
-      registers
+      (registers, max)
 
     }
 
-//    updatedRegisters.foreach(println)
-
-    findAllRegisters(instructions.tail, updatedRegisters)
+    findAllRegisters(instructions.tail, updatedRegisters, newMax)
 
   }
 

@@ -41,7 +41,11 @@ class DayEightTest extends FunSuite {
   }
 
   test("Test part one") {
-    assert(DayEight.partOne("/AdventOfCode/DayEight/DayEightTest.txt") == 1)
+    assert(DayEight.partOne(DayEight.part("/AdventOfCode/DayEight/DayEightTest.txt")._1) == 1)
+  }
+
+  test("Test part two") {
+    assert(DayEight.part("/AdventOfCode/DayEight/DayEightTest.txt")._2 == 10)
   }
 
 }
