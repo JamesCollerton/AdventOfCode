@@ -1,5 +1,7 @@
 package AdventOfCode.DayNine
 
+import AdventOfCode.Utils.ReadFileUtils
+
 object DayNine {
 
   /**
@@ -10,41 +12,44 @@ object DayNine {
     * @param args
     */
   def main(args: Array[String]): Unit = {
-    print("Hello, world")
+    val input = ReadFileUtils.readFileAsString("/AdventOfCode/DayNine/DayNine.txt").split("")
+    println(countGroups(input, false, 0, 0))
+    println(countGarbage(input, false, 0))
   }
 
-  def countGroups(characters: Array[String], inGarbage: Boolean, numEnclosedGroups: Int): Int = {
+  @annotation.tailrec
+  def countGroups(characters: Array[String], inGarbage: Boolean, numEnclosedGroups: Int, runningScore: Int): Int = {
 
-    if(characters.length == 0) return 0
+    if(characters.length == 0) return runningScore
 
-    val numberGroups = (characters.head, inGarbage) match {
-      case("{", false) => countGroups(characters.tail, inGarbage, numEnclosedGroups + 1)
-      case ("}", false) => countGroups(characters.tail, inGarbage, numEnclosedGroups - 1) + numEnclosedGroups
-      case ("<", _) => countGroups(characters.tail, true, numEnclosedGroups)
-      case (">", _) => countGroups(characters.tail, false, numEnclosedGroups)
-      case ("!", _) => countGroups(characters.tail.tail, inGarbage, numEnclosedGroups)
-      case _ => countGroups(characters.tail, inGarbage, numEnclosedGroups)
+    val (newCharacters, newInGarbage, newNumEnclosedGroups, newRunningScore) = (characters.head, inGarbage) match {
+      case("{", false) => (characters.tail, inGarbage, numEnclosedGroups + 1, runningScore)
+      case ("}", false) => (characters.tail, inGarbage, numEnclosedGroups - 1, runningScore + numEnclosedGroups)
+      case ("<", _) => (characters.tail, true, numEnclosedGroups, runningScore)
+      case (">", _) => (characters.tail, false, numEnclosedGroups, runningScore)
+      case ("!", _) => (characters.tail.tail, inGarbage, numEnclosedGroups, runningScore)
+      case _ => (characters.tail, inGarbage, numEnclosedGroups, runningScore)
     }
 
-    numberGroups
+    countGroups(newCharacters, newInGarbage, newNumEnclosedGroups, newRunningScore)
 
   }
 
-  def countGarbage(characters: Array[String], inGarbage: Boolean): Int = {
+  @annotation.tailrec
+  def countGarbage(characters: Array[String], inGarbage: Boolean, runningCount: Int): Int = {
 
-    if(characters.length == 0) return 0
+    if(characters.length == 0) return runningCount
 
-    val garbageCount = (characters.head, inGarbage) match {
-      case ("<", true) => countGarbage(characters.tail, true) + 1
-      case ("<", false) => countGarbage(characters.tail, true)
-      case (">", _) => countGarbage(characters.tail, false)
-      case ("!", _) => countGarbage(characters.tail.tail, inGarbage)
-      case (_, true) => countGarbage(characters.tail, inGarbage) + 1
-      case _ => countGarbage(characters.tail, inGarbage)
+    val (newCharacters, newIsGarbage, newRunningCount) = (characters.head, inGarbage) match {
+      case ("<", true) => (characters.tail, true, runningCount + 1)
+      case ("<", false) => (characters.tail, true, runningCount)
+      case (">", _) => (characters.tail, false, runningCount)
+      case ("!", _) => (characters.tail.tail, inGarbage, runningCount)
+      case (_, true) => (characters.tail, inGarbage, runningCount + 1)
+      case _ => (characters.tail, inGarbage, runningCount)
     }
 
-    garbageCount
-
+    countGarbage(newCharacters, newIsGarbage, newRunningCount)
   }
 
 }
