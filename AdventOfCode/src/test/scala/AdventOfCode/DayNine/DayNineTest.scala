@@ -36,4 +36,32 @@ class DayNineTest extends FunSuite {
     assert(DayNine.countGroups("{{<a!>},{<a!>},{<a!>},{<ab>}}".split(""), false, 0) == 3)
   }
 
+  test("Part two, <>, score of 0") {
+    assert(DayNine.countGarbage("<>".split(""), false) == 0)
+  }
+
+  test("Part two, <random characters>, score of 17") {
+    assert(DayNine.countGarbage("<random characters>".split(""), false) == 17)
+  }
+
+  test("Part two, <<<<>, score of 3") {
+    assert(DayNine.countGarbage("<<<<>".split(""), false) == 3)
+  }
+
+  test("Part two, <{!>}>, score of 2") {
+    assert(DayNine.countGarbage("<{!>}>".split(""), false) == 2)
+  }
+
+  test("Part two, <!!>, score of 0") {
+    assert(DayNine.countGarbage("<!!>".split(""), false) == 0)
+  }
+
+  test("Part two, <!!!>>, score of 0") {
+    assert(DayNine.countGarbage("<!!!>>".split(""), false) == 0)
+  }
+
+  test("Part two, <{o\"i!a,<{i<a>, score of 10") {
+    assert(DayNine.countGarbage("<{o\"i!a,<{i<a>".split(""), false) == 10)
+  }
+
 }

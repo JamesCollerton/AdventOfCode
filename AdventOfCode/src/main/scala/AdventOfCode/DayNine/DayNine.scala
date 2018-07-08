@@ -27,6 +27,24 @@ object DayNine {
     }
 
     numberGroups
+
+  }
+
+  def countGarbage(characters: Array[String], inGarbage: Boolean): Int = {
+
+    if(characters.length == 0) return 0
+
+    val garbageCount = (characters.head, inGarbage) match {
+      case ("<", true) => countGarbage(characters.tail, true) + 1
+      case ("<", false) => countGarbage(characters.tail, true)
+      case (">", _) => countGarbage(characters.tail, false)
+      case ("!", _) => countGarbage(characters.tail.tail, inGarbage)
+      case (_, true) => countGarbage(characters.tail, inGarbage) + 1
+      case _ => countGarbage(characters.tail, inGarbage)
+    }
+
+    garbageCount
+
   }
 
 }
